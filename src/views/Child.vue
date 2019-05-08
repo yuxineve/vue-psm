@@ -1,17 +1,15 @@
 
 <template>
-  <div id="Home">
-    {{sContent}}
+  <div id="Child">
+    I'm Child
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Child',
   data () {
-    return {
-      sContent: 'I am Home'
-    }
+    return {}
   },
   methods: {},
   computed: {},
@@ -23,4 +21,5 @@ export default {
 
 <style lang="less">
 @import '../assets/style/common.less';
+
 </style>
