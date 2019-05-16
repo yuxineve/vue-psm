@@ -53,11 +53,11 @@ export default {
         }
         axios.post('/api/auth?type=mpApp_register',params)
         .then(function(data){
-          console.log(data);
+          //console.log(data);
           that.$router.push('/home');
         })
         .catch(function(e){
-          console.log(e)
+          //console.log(e)
         })
     },
   },

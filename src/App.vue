@@ -6,10 +6,13 @@
 </template>
 
 <style lang="less">
-body,html{
+body,html,ul,li{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+li{
+  list-style: none;
 }
 html, body, :global(#root){
   width: 100%;
