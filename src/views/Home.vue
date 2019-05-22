@@ -2,7 +2,7 @@
 <template>
   <div id="Home">
     <div>{{ count }} | {{ countAlias }} | {{ countPlusLocalState }}</div>
-    <router-link to="/home/Child">chilid</router-link>
+    <router-link to="/child">chilid</router-link>
     <router-view></router-view>
     <CarouselMap :carousel-data='carouselData'></CarouselMap>
   </div>
@@ -27,7 +27,30 @@ export default {
       sContent: 'I am Home'
     }
   },
-  methods: {},
+  created () {
+    console.log(this.$router);
+    this.isTimeOut();
+  },
+  methods: {
+    startTimer:function(){
+      let that = this;
+      clearInterval(that.timeOut);
+      that.timeOut = setInterval(function () {
+        that.$router.push({path: '/home'})
+      },1000*6)
+    },
+    isTimeOut:function(){
+      let that = this;
+      if(that.$route.path == "/") {
+        that.startTimer();
+      }
+      document.body.onmouseup = that.startTimer;
+      document.body.onmousemove = that.startTimer;
+      document.body.onkeyup  = that.startTimer;
+      document.body.onclick  = that.startTimer;
+      document.body.ontouchend  = that.startTimer;
+    },
+  },
   computed: mapState({
     count: state => state.count,
     countAlias: 'count',

@@ -27,13 +27,17 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/home.vue'),
-      children: [
-        {
-          path: '',
-          name: 'Child',
-          component: () => import('./views/Child.vue')
-        }
-      ]
+    },{
+      path: '/child',
+      name: 'Child',
+      component: () => import('@/views/Child.vue')
+    },{
+      path: '/reBackRouter',
+      meta: {
+        title: '跳转页',
+        scrollToTop: true
+      },
+      component: () => import('@/components/reBackRouter.vue')
     }
   ]
 })

@@ -1,20 +1,24 @@
 
 <template>
-  <div id="Child">
-    I'm Child
+  <div id="ReBackRouter">
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Child',
+  name: 'ReBackRouter',
   data () {
     return {}
   },
   created () {
-   // console.log(this.$router)
+    this.backFun();
   },
-  methods: {},
+  methods: {
+    backFun() {
+      this.$router.replace({path: '/'})
+    }
+  },
   computed: {},
   watch: {},
   props: [ ],
@@ -23,6 +27,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../assets/style/common.less';
 
 </style>

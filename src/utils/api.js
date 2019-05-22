@@ -1,17 +1,23 @@
 import axios from "axios"
 import qs from "qs"
+
+let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 let cancel = ""
 let requestConfig = {
     production: "http://www.tutrav.cn",
     development: "http://test.tutrav.cn",
     timeout: 1000
 };
-// // 环境的切换
-// if (process.env.NODE_ENV == "development") {
-//   axios.defaults.baseURL = requestConfig.development;
-// } else if (process.env.NODE_ENV == "production") {
-//   axios.defaults.baseURL = requestConfig.production;
-// }
+let removePending = (ever) => {
+    for (let i in pending) {
+        const urlEve = pending[i].config.url + '&' + pending[i].config.method;
+        if (urlEve === ever.url + '&' + ever.method) { //当前请求在数组中存在时执行函数体
+            pending[i].cancel(); 
+            pending.splice(i, 1);
+        }
+    }
+}
+
 axios.defaults.baseURL = requestConfig[process.env.NODE_ENV];
 // 请求拦截器
 axios.interceptors.request.use(
@@ -19,6 +25,8 @@ axios.interceptors.request.use(
         // 每次请求之前拦截加上token
         const token = sessionStorage.token;
         token && (config.headers["X-CSRF-TOKEN"] = token);
+        removePending(config); //在一个ajax发送前执行一下取消操作
+        pending.push({ config: config, cancel: cancel }); 
         return config;
     },
     error => {
@@ -30,6 +38,7 @@ axios.interceptors.request.use(
 // 添加响应拦截器
 axios.interceptors.response.use(
     response => {
+        removePending(response.config);  //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
         // 对响应数据做点什么
         if (response.status === 200) {
             return Promise.resolve(response.data)
@@ -55,7 +64,7 @@ const handelData = (options, data) => {
         method: options.method,
         url: options.url,
         responseType: "json",
-        withCredentials: true, // 表示跨域请求时是否需要使用凭证
+        withCredentials: false, // 表示跨域请求时是否需要使用凭证
         arrayFormat: options.arrayFormat, //有三个参数 'indices' id[0]=b&id[1]=c  'brackets' 'id[]=b&id[]=c' 'repeat' 'id=b&id=c'
         data,
         header: {
