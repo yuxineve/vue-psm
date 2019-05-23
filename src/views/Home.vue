@@ -37,7 +37,7 @@ export default {
       clearInterval(that.timeOut);
       that.timeOut = setInterval(function () {
         that.$router.push({path: '/home'})
-      },1000*6)
+      },1000*60*2)
     },
     isTimeOut:function(){
       let that = this;
