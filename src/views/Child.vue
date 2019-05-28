@@ -4,7 +4,7 @@
     I'm Child
     <input type="text" placeholder="Text input" @focus="show" data-layout="normal" />
     <vue-touch-keyboard :options="options" v-if="visible" :layout="layout" :cancel="hide" :accept="accept" :input="input" />
-    <Keyborad id="a" :placeholder="placeholder" @getSearchValue="getSearchValue"></Keyborad>
+    <Keyborad :placeholder="placeholder" @getSearchValue="getSearchValue"></Keyborad>
   </div>
 </template>
 
