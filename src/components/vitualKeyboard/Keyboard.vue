@@ -2,11 +2,11 @@
 <template>
   <div id="Keyboard" class="vitualKeyboard">
     <div class="search">
-      <input  name="inputArea" id="inputArea"  :placeholder="placeholder" v-model="value"/>
+      <input  name="inputArea" id="inputArea" autofocus="autofocus" :placeholder="placeholder" v-model="value"/>
       <el-button type="primary" icon="el-icon-search" @click="searchAseetesProd">查询</el-button>
       <!-- <input type="button" /> -->
     </div>
-    <div class="keyboardBox" id="keyboard" style='display: none;'>
+    <div class="keyboardBox" id="keyboard" style='display: block;'>
         <p class="showInput"></p>
         <hr>
         <div class="chinesePrompt">

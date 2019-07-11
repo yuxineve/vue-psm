@@ -38,6 +38,10 @@ export default new Router({
         scrollToTop: true
       },
       component: () => import('@/components/reBackRouter.vue')
+    },{
+      path:'/index',
+      name:'Index',
+      component: () => import('@/views/index.vue')
     }
   ]
 })

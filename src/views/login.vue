@@ -1,6 +1,6 @@
 <template>
   <div id="Login">
-    <img :src="imgbg" alt="404 Not Found" style="overflow:hidden"/>
+    <!-- <img :src="imgbg" alt="404 Not Found" style="overflow:hidden"/> -->
     <div class="btnWrap">
        <div class="login-name login-button">
         <span>
@@ -25,6 +25,7 @@
 import Vue from 'vue'
 import { Button, Input, Icon } from 'element-ui'
 import axios from '@/utils/api.js'
+//import common from '@/utils/common.js'
 
 Vue.use(Button)
 Vue.use(Input)
@@ -36,11 +37,11 @@ export default {
     return {
       username: '',
       password:'',
-      imgbg:require("@/assets/images/login.jpg"),
+      imgbg:'',
     }
   },
   created () {
-    //console.log(axios)
+
   },
   methods: {
     loginIn:function(){
@@ -90,6 +91,9 @@ export default {
 }
 #Login{
   position: relative;
+  background: url('~@/assets/images/login.jpg') center center no-repeat;
+  background-size: cover;
+  height: 100%;
   button.loginIn{
     width: 35rem;
   }

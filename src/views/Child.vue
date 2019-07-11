@@ -2,9 +2,14 @@
 <template>
   <div id="Child">
     I'm Child
-    <input type="text" placeholder="Text input" @focus="show" data-layout="normal" />
-    <vue-touch-keyboard :options="options" v-if="visible" :layout="layout" :cancel="hide" :accept="accept" :input="input" />
-    <Keyborad :placeholder="placeholder" @getSearchValue="getSearchValue"></Keyborad>
+    <div class="numKey">
+      <input type="text" placeholder="数字键盘" @focus="show" data-layout="numeric" />
+      <vue-touch-keyboard :options="options" v-if="visible" :layout="layout" :cancel="hide" :accept="accept" :input="input" />
+    </div>
+    <!-- 中英文输入键盘 -->
+    <div class="chinessKey">
+      <Keyborad :placeholder="placeholder" @getSearchValue="getSearchValue"></Keyborad>
+    </div>
   </div>
 </template>
 
@@ -13,15 +18,17 @@ import Vue from 'vue'
 import VueTouchKeyboard from "vue-touch-keyboard"
 import style from "vue-touch-keyboard/dist/vue-touch-keyboard.css";
 import Keyborad from '@/components/vitualKeyboard/Keyboard'
+//import noTouch from '@/utils/noTouch.js'
 
 Vue.use(VueTouchKeyboard);
 export default {
   name: 'Child',
   data () {
     return {
-      placeholder:'请输入name',
-      visible: false,
-      layout: "normal",
+      placeholder:'请输入name',//中英文输入键盘
+      //数字键盘
+      visible: true,
+      layout: "numeric",
       input: null,
       options: {
         useKbEvents: false,
@@ -30,7 +37,10 @@ export default {
     }
   },
   created () {
-
+  
+  },
+  mounted (){
+   // document.getElementById('inputArea').focus()
   },
   methods: {
     accept(text) {
@@ -51,7 +61,6 @@ export default {
       console.log(e);
     }
   },
-  computed: {},
   watch: {},
   props: [ ],
   components: { Keyborad }
@@ -59,6 +68,18 @@ export default {
 </script>
 
 <style lang="less">
-@import '../assets/style/common.less';
+.numKey{
+  position: absolute;
+  width: 24rem;
+  .keyboard .line:nth-child(4) .key:nth-child(-n+3){
+    display: none;
+  }
+  .keyboard .next {
+    display: none
+  }
+  .keyboard .line:nth-child(4) .key{
+    flex: 40!important;
+  }
+}
 
 </style>

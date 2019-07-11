@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     backFun() {
-      this.$router.replace({path: '/'})
+      this.$router.replace({path: '/home'})
     }
   },
   computed: {},
