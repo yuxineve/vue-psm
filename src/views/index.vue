@@ -10,30 +10,32 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default {
-  name: 'Index',
-  data () {
-    return {}
+  name: "Index",
+  data() {
+    return {};
   },
-  created () {},
+  created() {},
   methods: {},
   computed: {
-    count () {
-      return this.$store.state.count
+    count() {
+      return this.$store.state.count;
     }
   },
   watch: {},
-  props: [ ],
+  props: [],
   components: {}
-}
+};
 </script>
 
 <style lang="less">
 #Index {
   height: 100%;
-  .videosConten,.operateContent,.imagesContent{
+  .videosConten,
+  .operateContent,
+  .imagesContent {
     height: 33%;
     border: 1px solid #ccc;
   }
