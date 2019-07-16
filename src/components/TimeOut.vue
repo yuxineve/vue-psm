@@ -1,7 +1,7 @@
 
 <template>
   <div id="TimeOut">
-    <div v-if="count < 31 ">{{ count }}</div>
+    <div v-if="count < 30 ">{{ count }}</div>
   </div>
 </template>
 
