@@ -1,7 +1,7 @@
 
 <template>
   <div id="Content">
-    <el-button type="primary" plain>主要按钮</el-button>
+    <el-button type="primary" plain v-on:click="getPageButton">主要按钮</el-button>
     content
     <div v-if="count < 31 ">{{ count }}</div>
   </div>
@@ -17,7 +17,11 @@ export default {
     return {}
   },
   created () {},
-  methods: {},
+  methods: {
+    getPageButton(){
+      console.log(this.$router)
+    },
+  },
   computed: {
     count() {
       return this.$store.state.count;

@@ -1,62 +1,30 @@
 
 <template>
   <div id="Index">
-    <div class="videosConten">
-      <div>
-        <video id="myvideo" muted width="100%" height="100%" autoplay="autoplay">
-          <source src="./../assets/videoAd/test1.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
+    <VideoPlay />
+    <router-view></router-view>
+    <ImageAd />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import VideoPlay from "@/components/VideoPlay"
+import ImageAd from "@/components/ImageAd"
 
 export default {
   name: "Index",
   data() {
     return {
-      vList : [
-        require("@/assets/videoAd/test1.mp4"),
-        require("@/assets/videoAd/test2.mp4"),
-        require("@/assets/videoAd/test3.mp4"),
-        require("@/assets/videoAd/test4.mp4"),
-        require("@/assets/videoAd/test5.mp4")
-      ],
-      curr:0,
+    
     };
   },
   created() {},
-  mounted(){
-    this.autoPlay();
-    this.endPlay();
-  },
-  methods: {
-    autoPlay() {
-      const that = this;
-      const vLen = that.vList.length;
-      const video = document.getElementById('myvideo');
-      video.addEventListener('playing',function(){
-        that.curr++;
-        if(that.curr >= vLen){
-          that.curr = 0;
-        }
-      });
-    },
-    endPlay() {
-      const that = this;
-      const video = document.getElementById('myvideo');
-      video.addEventListener('ended',function(){
-        video.src = that.vList[that.curr];
-      });
-    }
-  },
+  methods: {},
   computed: {},
   watch: {},
   props: [],
-  components: {}
+  components: { VideoPlay, ImageAd }
 };
 </script>
 
