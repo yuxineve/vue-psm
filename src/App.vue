@@ -1,8 +1,6 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <!-- <router-view class="main" name="content"></router-view>
-    <router-view class="main" name="imageAd"></router-view> -->
   </div>
 </template>
 <script>
