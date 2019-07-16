@@ -1,9 +1,8 @@
 
 <template>
-  <div id="Content">
-    <el-button type="primary" plain v-on:click="getPageButton">主要按钮</el-button>
+  <div id="Content" class="mainView">
     content
-    <div v-if="count < 31 ">{{ count }}</div>
+    <el-button type="primary" plain v-on:click="goBack">返回</el-button>
   </div>
 </template>
 
@@ -18,14 +17,12 @@ export default {
   },
   created () {},
   methods: {
-    getPageButton(){
-      console.log(this.$router)
-    },
+    goBack(){
+      this.$router.go(-1)
+    }
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    }
+    
   },
   watch: {},
   props: [ ],

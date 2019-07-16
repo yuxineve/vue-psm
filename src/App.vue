@@ -6,8 +6,9 @@
   </div>
 </template>
 <script>
-import { MessageBox, Message } from "element-ui";
 import Vue from "vue";
+import { Button, MessageBox, Message } from "element-ui";
+import '@/assets/style/common.less';
 
 export default {
   data() {
@@ -46,7 +47,6 @@ export default {
 };
 </script>
 <style lang="less">
-
 body {
   height: 100%;
 }

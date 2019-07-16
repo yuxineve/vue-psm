@@ -1,6 +1,6 @@
 
 <template>
-  <div id="videoPlay">
+  <div id="videoPlay" class="mainView">
     <video id="myvideo" muted width="100%" height="100%" autoplay="autoplay">
       <source src="./../assets/videoAd/test1.mp4" type="video/mp4" />
     </video>
