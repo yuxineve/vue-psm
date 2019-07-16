@@ -19,11 +19,11 @@ export default {
       carouselData: {
         carouselTime: 1000 * 10,
         carouselImg: [
-          { img: require("@/assets/images/adImg/banner1.jpg"), title: 1 },
-          { img: require("@/assets/images/adImg/banner2.jpg"), title: 2 },
-          { img: require("@/assets/images/adImg/banner3.jpg"), title: 3 },
-          { img: require("@/assets/images/adImg/banner4.jpg"), title: 4 },
-          { img: require("@/assets/images/adImg/banner5.jpg"), title: 5 }
+          { img: require("@/assets/images/adImgLevel-1/banner1.jpg"), title: 1 },
+          { img: require("@/assets/images/adImgLevel-1/banner2.jpg"), title: 2 },
+          { img: require("@/assets/images/adImgLevel-1/banner3.jpg"), title: 3 },
+          { img: require("@/assets/images/adImgLevel-1/banner4.jpg"), title: 4 },
+          { img: require("@/assets/images/adImgLevel-1/banner5.jpg"), title: 5 }
         ]
       },
       timeOut: ""
@@ -38,6 +38,7 @@ export default {
 <style lang="less">
 #Home {
   position: relative;
+  height: 100%;
 }
 .enter {
   position: absolute;

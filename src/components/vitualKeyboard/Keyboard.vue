@@ -70,7 +70,7 @@
             <div class="keysCmd key_enter" data-kid="13">Enter</div>
         </div>
         <div class="line">
-            <div class="keysCmd k-w-100" data-kid="16">Shift</div>
+            <div class="keysCmd k-w-100 active" data-kid="16">Shift</div>
             <div class="keys" data-kid="90">Z</div>
             <div class="keys" data-kid="88">X</div>
             <div class="keys" data-kid="67">C</div>
@@ -81,7 +81,7 @@
             <div class="keys_d t-a-l" data-kid="188"><div></div><div>,</div></div>
             <div class="keys_d t-a-l" data-kid="190"><div>></div><div>.</div></div>
             <div class="keys_d t-a-l" data-kid="191"><div>?</div><div>/</div></div>
-            <div class="keysCmd k-w-120" data-kid="16">Shift</div>
+            <div class="keysCmd k-w-120 active" data-kid="16">Shift</div>
         </div>
         <!-- <div class="line">
             <div class="keysCmd k-w-704" data-kid="32"></div>
@@ -107,7 +107,8 @@ export default {
       value:'',
     }
   },
-  created () {},
+  created () {
+  },
   methods: {
     searchAseetesProd(){
          this.$emit("getSearchValue", this.value);
@@ -116,7 +117,7 @@ export default {
         let self = this;
       var keyboardObj = document.getElementById("keyboard"),
         _inputID,
-        _shiftStatus = false,
+        _shiftStatus = true,
         _capsLock = false,
         cStr = "",
         isShowAll = false,

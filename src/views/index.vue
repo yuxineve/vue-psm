@@ -1,11 +1,13 @@
 
 <template>
   <div id="Index">
-    <div class="videosConten"></div>
-    <div class="operateContent">
-      <div v-if="count < 31 ">{{ count }}</div>
+    <div class="videosConten">
+      <div>
+        <video id="myvideo" muted width="100%" height="100%" autoplay="autoplay">
+          <source src="./../assets/videoAd/test1.mp4" type="video/mp4" />
+        </video>
+      </div>
     </div>
-    <div class="imagesContent"></div>
   </div>
 </template>
 
@@ -15,15 +17,43 @@ import Vue from "vue";
 export default {
   name: "Index",
   data() {
-    return {};
+    return {
+      vList : [
+        require("@/assets/videoAd/test1.mp4"),
+        require("@/assets/videoAd/test2.mp4"),
+        require("@/assets/videoAd/test3.mp4"),
+        require("@/assets/videoAd/test4.mp4"),
+        require("@/assets/videoAd/test5.mp4")
+      ],
+      curr:0,
+    };
   },
   created() {},
-  methods: {},
-  computed: {
-    count() {
-      return this.$store.state.count;
+  mounted(){
+    this.autoPlay();
+    this.endPlay();
+  },
+  methods: {
+    autoPlay() {
+      const that = this;
+      const vLen = that.vList.length;
+      const video = document.getElementById('myvideo');
+      video.addEventListener('playing',function(){
+        that.curr++;
+        if(that.curr >= vLen){
+          that.curr = 0;
+        }
+      });
+    },
+    endPlay() {
+      const that = this;
+      const video = document.getElementById('myvideo');
+      video.addEventListener('ended',function(){
+        video.src = that.vList[that.curr];
+      });
     }
   },
+  computed: {},
   watch: {},
   props: [],
   components: {}
@@ -31,13 +61,7 @@ export default {
 </script>
 
 <style lang="less">
-#Index {
-  height: 100%;
-  .videosConten,
-  .operateContent,
-  .imagesContent {
-    height: 33%;
-    border: 1px solid #ccc;
-  }
+#Index{
+  color: #333;
 }
 </style>

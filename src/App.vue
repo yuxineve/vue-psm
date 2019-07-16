@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <router-link to="/"></router-link>
     <router-view />
+    <router-view class="main" name="content"></router-view>
+    <router-view class="main" name="imageAd"></router-view>
   </div>
 </template>
 <script>
@@ -45,6 +46,7 @@ export default {
 };
 </script>
 <style lang="less">
+
 body {
   height: 100%;
 }
@@ -66,7 +68,7 @@ body,
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
   font-size: 1.4rem;
   height: 100%;

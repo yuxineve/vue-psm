@@ -33,7 +33,7 @@ export default {
   },
   computed: {},
   watch: {},
-  props: ['carouselData'],
+  props: ['carouselData'],//carouselData:{carouselTime:1000,carouselImg:[{img:'',title:''}]}
   components: {}
 }
 </script>
@@ -41,6 +41,7 @@ export default {
 <style lang="less">
 #CarouselMap{
   position: relative;
+  height: 100%;
   img{
     position: absolute;
     top: 0;
