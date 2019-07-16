@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <router-view name="timeOut"></router-view>
   </div>
 </template>
 <script>
 import Vue from "vue";
-import { Button, MessageBox, Message } from "element-ui";
 import '@/assets/style/common.less';
 
 export default {
@@ -70,6 +70,7 @@ body,
   color: #2c3e50;
   font-size: 1.4rem;
   height: 100%;
+  position: relative;
 }
 #nav {
   padding: 3rem;

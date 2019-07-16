@@ -25,7 +25,10 @@ export default new Router({
     {
       path: "/index",
       name: "Index",
-      component: () => import("@/views/index.vue"),
+      components:{
+        default:() => import("@/views/index.vue"),
+        timeOut:() => import('@/components/TimeOut.vue')
+      },
       children: [
         {
           path: "",

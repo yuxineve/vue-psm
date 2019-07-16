@@ -10,6 +10,8 @@
 import Vue from "vue"
 import { Button } from "element-ui"
 
+Vue.use(Button)
+
 export default {
   name: 'Content',
   data () {
@@ -21,9 +23,7 @@ export default {
       this.$router.go(-1)
     }
   },
-  computed: {
-    
-  },
+  computed: {},
   watch: {},
   props: [ ],
   components: {}

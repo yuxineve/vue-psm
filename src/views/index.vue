@@ -12,7 +12,7 @@
 <script>
 import Vue from "vue";
 import VideoPlay from "@/components/VideoPlay"
-import CarouselMap from "@/components/CarouselMap";
+import CarouselMap from "@/components/CarouselMap"
 
 export default {
   name: "Index",

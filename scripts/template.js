@@ -24,6 +24,8 @@ const indexTep = `
 </template>
 
 <script>
+import '@/assets/style/common.less';
+
 export default {
   name: '${capPirName}',
   data () {
@@ -39,13 +41,12 @@ export default {
 </script>
 
 <style lang="less">
-@import '@/assets/style/common.less';
 #${capPirName} {
 
 }
 </style>
-`
+`;
 
-fs.writeFileSync(`./src/views/${dirName}.vue`, indexTep) // 创建对应的文件views components
+fs.writeFileSync(`./src/views/${dirName}.vue`, indexTep); // 创建对应的文件views components
 console.log("文件创建成功")
 process.exit(0)

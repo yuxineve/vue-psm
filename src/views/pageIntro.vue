@@ -6,13 +6,14 @@
     <router-link :to="{ name: 'Content'}">
       <el-button type="primary" plain >下一页</el-button>
     </router-link>
-    <div v-if="count < 31 ">{{ count }}</div>
   </div>
 </template>
 
 <script>
 import Vue from "vue"
 import { Button } from "element-ui"
+
+Vue.use(Button);
 
 export default {
   name: 'PageIntro',
@@ -25,11 +26,7 @@ export default {
       this.$router.push('index/content');
     },
   },
-  computed: {
-    count() {
-      return this.$store.state.count;
-    }
-  },
+  computed: { },
   watch: {},
   props: [ ],
   components: {}
