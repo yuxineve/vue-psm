@@ -17,7 +17,7 @@ export default {
   methods: {},
   computed: {
     count() {
-        console.log(this.$store.state.count);
+      console.log(this.$store.state.count);
       return this.$store.state.count;
     }
   },
