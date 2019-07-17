@@ -4,7 +4,7 @@
     <div class="nav">
         <div class="logioLeft">
           <div class="logioIcon"></div>
-          <div class="hotelTitle">途易国际酒店</div>
+          <div class="hotelTitle">{{vavTitle}}</div>
         </div>
         <div class="buttonRight">
           <el-button type="warning" class="homePage" round v-on:click="homePage">首 页</el-button>
@@ -22,7 +22,9 @@ import '@/assets/style/common.less'
 export default {
   name: 'Nav',
   data () {
-    return {}
+    return {
+      vavTitle:'途易国际酒店',
+    }
   },
   created () {  },
   methods: {
