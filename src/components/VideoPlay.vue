@@ -1,7 +1,7 @@
 
 <template>
-  <div id="videoPlay" class="mainView">
-    <video id="myvideo" muted width="100%" height="100%" autoplay="autoplay">
+  <div id="videoPlay" class="">
+    <video id="myvideo" muted width="1080px" height="100%" autoplay="autoplay">
       <source src="./../assets/videoAd/test1.mp4" type="video/mp4" />
     </video>
   </div>
@@ -58,6 +58,7 @@ export default {
 
 <style lang="less">
 #videoPlay{
+  height:62.1rem;
   color: #333;
 }
 </style>

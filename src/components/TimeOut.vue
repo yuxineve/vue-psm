@@ -17,7 +17,7 @@ export default {
   methods: {},
   computed: {
     count() {
-      console.log(this.$store.state.count);
+      // console.log(this.$store.state.count);
       return this.$store.state.count;
     }
   },
@@ -31,7 +31,7 @@ export default {
 #TimeOut {
     color: #333;
     position: absolute;
-    top: 36%;
+    top: 26%;
     width: 100px;
     height: 100px;
     background: pink;

@@ -5,17 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count:120,
+    count: 120,
+    seenGoBack: true
   },
   mutations: {
     decrease(state) {
-      state.count--
+      state.count--;
     },
-    init(state,n){
+    init(state, n) {
       state.count = n;
+    },
+    changeStatus(state, flag) {
+      state.seenGoBack = flag;
     }
   },
-  actions: {
-
-  }
-})
+  actions: {}
+});

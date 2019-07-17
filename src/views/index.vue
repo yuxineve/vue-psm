@@ -2,7 +2,9 @@
 <template>
   <div id="Index">
     <VideoPlay />
+    <Nav></Nav>
     <router-view></router-view>
+    <div class="bottomBox"></div>    
     <div class="mainView">
       <CarouselMap :carousel-data="carouselData"></CarouselMap>
     </div>
@@ -13,6 +15,8 @@
 import Vue from "vue";
 import VideoPlay from "@/components/VideoPlay"
 import CarouselMap from "@/components/CarouselMap"
+import Nav from "@/components/Nav"
+
 
 export default {
   name: "Index",
@@ -36,12 +40,17 @@ export default {
   computed: {},
   watch: {},
   props: [],
-  components: { VideoPlay, CarouselMap }
+  components: { VideoPlay, CarouselMap, Nav }
 };
 </script>
 
 <style lang="less">
 #Index{
+  .bottomBox{
+    width: 100%;
+    height: 1.2rem;
+    background:#02C2C2;
+  }
   color: #333;
 }
 </style>

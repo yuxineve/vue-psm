@@ -1,6 +1,6 @@
 
 <template>
-  <div id="PageIntro" class="mainView">
+  <div id="PageIntro" class="contentView">
     hahahhahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     <!-- //v-on:click="getPageButton" -->
     <router-link :to="{ name: 'Content'}">
@@ -20,7 +20,9 @@ export default {
   data () {
     return {}
   },
-  created () {},
+  created () {
+    this.$store.commit("changeStatus", false);
+  },
   methods: {
     getPageButton(){
       this.$router.push('index/content');
@@ -29,7 +31,7 @@ export default {
   computed: { },
   watch: {},
   props: [ ],
-  components: {}
+  components: {  }
 }
 </script>
 

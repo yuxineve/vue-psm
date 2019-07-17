@@ -29,17 +29,14 @@ export default new Router({
         default:() => import("@/views/index.vue"),
         timeOut:() => import('@/components/TimeOut.vue')
       },
-      children: [
-        {
+      children: [{
           path: "",
           component: () => import("@/views/pageIntro")
-        },
-        {
+        },{
           path: "content",
           name: "Content",
           component: () => import("@/views/Content")
-        }
-      ]
+      }]
     }
   ]
 });

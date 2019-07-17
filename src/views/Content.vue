@@ -1,6 +1,6 @@
 
 <template>
-  <div id="Content" class="mainView">
+  <div id="Content" class="contentView">
     content
     <el-button type="primary" plain v-on:click="goBack">返回</el-button>
   </div>
@@ -17,7 +17,9 @@ export default {
   data () {
     return {}
   },
-  created () {},
+  created () {
+    this.$store.commit("changeStatus", true);
+  },
   methods: {
     goBack(){
       this.$router.go(-1)
@@ -26,7 +28,7 @@ export default {
   computed: {},
   watch: {},
   props: [ ],
-  components: {}
+  components: { }
 }
 </script>
 
