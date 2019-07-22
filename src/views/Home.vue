@@ -1,3 +1,4 @@
+<!--大屏广告页-->
 <template>
   <div id="Home">
     <!-- <div>{{ count }} | {{ countAlias }} | {{ countPlusLocalState }}</div> -->

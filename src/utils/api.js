@@ -24,8 +24,10 @@ axios.defaults.baseURL = requestConfig[process.env.NODE_ENV];
 axios.interceptors.request.use(
   config => {
     // 每次请求之前拦截加上token
+    console.log(config);
     const token = sessionStorage.token;
     token && (config.headers["X-CSRF-TOKEN"] = token);
+
     removePending(config); //在一个ajax发送前执行一下取消操作
     pending.push({ config: config, cancel: cancel });
     return config;
@@ -54,6 +56,11 @@ axios.interceptors.response.use(
 
     // eslint-disable-next-line no-empty
     if (error) {
+      // store.commit(types.LOGOUT);
+      router.replace({
+        path: "login"
+        // query: { redirect: router.currentRoute.fullPath } // URL 查询参数
+      });
     }
     return Promise.reject(error);
   }
@@ -75,16 +82,15 @@ const handelData = (options, data) => {
       cancel = c; // 记录当前请求的取消方法
     })
   };
-  httpDefaultOpts.data =
-    httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
-  return new Promise((resolve, reject) => {
-    axios(httpDefaultOpts)
-      .then(response => {
-        resolve(response);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
-};
+  httpDefaultOpts.data = httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
+    return new Promise((resolve, reject) => {
+      axios(httpDefaultOpts)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  };
 export default handelData;

@@ -25,18 +25,46 @@ export default new Router({
     {
       path: "/index",
       name: "Index",
-      components:{
-        default:() => import("@/views/index.vue"),
-        timeOut:() => import('@/components/TimeOut.vue')
+      components: {
+        default: () => import("@/views/index.vue"),
+        timeOut: () => import("@/components/TimeOut.vue")
       },
-      children: [{
+      children: [
+        {
           path: "",
           component: () => import("@/views/pageIntro")
-        },{
-          path: "content",
-          name: "Content",
-          component: () => import("@/views/Content")
-      }]
+        },
+        {
+          path: "orderRoom",
+          name: "OrderRoom",
+          component: () => import("@/views/orderRoom")
+        },
+        {
+          path: "sceneRoom",
+          name: "SceneRoom",
+          component: () => import("@/views/sceneRoom")
+        },
+        {
+          path: "groupRoom",
+          name: "GroupRoom",
+          component: () => import("@/views/groupRoom")
+        },
+        {
+          path: "continuedRoom",
+          name: "ContinuedRoom",
+          component: () => import("@/views/continuedRoom")
+        },
+        {
+          path: "checkoutRoom",
+          name: "CheckoutRoom",
+          component: () => import("@/views/checkoutRoom")
+        },
+        {
+          path: "techrepublic",
+          name: "Techrepublic",
+          component: () => import("@/views/techrepublic")
+        }
+      ]
     }
   ]
 });

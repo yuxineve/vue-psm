@@ -1,4 +1,4 @@
-
+<!--大屏操作初始页（包含视频播放区、操作区、广告区）-->
 <template>
   <div id="Index">
     <VideoPlay />

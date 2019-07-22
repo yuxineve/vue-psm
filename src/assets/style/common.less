@@ -1,14 +1,69 @@
-#CarouselMap img{
-    height: 100%;
-    width: 100%;
+#CarouselMap img {
+  height: 100%;
+  width: 100%;
 }
 #Index {
   height: 100%;
-  background: #F9FAFC ;
-  .mainView  {
-    height: 60.8rem; 
+  background: #f9fafc;
+  .mainView {
+    height: 60.8rem;
   }
-  .contentView{
+  .contentView {
     height: 57.4rem;
+    background: url("~@/assets/images/bg.png") no-repeat center center;
+    background-size: cover;
+    position: relative;
   }
+}
+.leftTips {
+  // position: absolute;
+  // bottom: 9.7rem;
+  float:left;
+  .tipsBox {
+    width: 21rem;
+    height: 17rem;
+    background: url("~@/assets/images/tipBox.png") no-repeat center center;
+    background-size: cover;
+    margin: 0 0 1rem 5rem;
+    position: relative;
+    text-align: center;
+    span {
+      font-size: 1.8rem;
+      color: #fdfdfd;
+      margin: 0 auto;
+      display: table-cell;
+      vertical-align: middle;
+      width: 21rem;
+      height: 13rem;
+      padding: 0 2.1rem;
+    }
+  }
+  .tipsIcon {
+    width: 14.2rem;
+    height: 14rem;
+    background: url("~@/assets/images/cartoonist.png") no-repeat center center;
+    background-size: cover;
+    margin-left: 2.2rem;
+  }
+}
+::-webkit-scrollbar-button{
+  display:none;
+}
+::-webkit-scrollbar{
+  width: .2rem; /*对垂直流动条有效*/
+  height: 14rem; /*对水平流动条有效*/
+}
+   /*定义滚动条的外轨道颜色、内阴影及圆角*/
+::-webkit-scrollbar-track{
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color:#666;
+    border-radius: 1px;
+}
+// 滚动条内滑块
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+@font-face{
+  font-family: ALHY;
+  src:url('../font/ALIHYAIHei.ttf');
 }

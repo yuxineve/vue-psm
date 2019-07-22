@@ -3,11 +3,11 @@
   <div id="Nav">
     <div class="nav">
         <div class="logioLeft">
-          <div class="logioIcon"></div>
-          <div class="hotelTitle">{{vavTitle}}</div>
+          <div class="logioIcon"><img :src="navImage" alt=""></div>
+          <div class="hotelTitle">{{navTitle}}</div>
         </div>
         <div class="buttonRight">
-          <el-button type="warning" class="homePage" round v-on:click="homePage">首 页</el-button>
+          <el-button v-if="this.$store.state.seenHome" type="warning" class="homePage" round v-on:click="homePage">首 页</el-button>
           <el-button v-if="this.$store.state.seenGoBack" type="warning" class="goBack" round v-on:click="goBack">上一步</el-button>
         </div>
     </div>
@@ -23,10 +23,11 @@ export default {
   name: 'Nav',
   data () {
     return {
-      vavTitle:'途易国际酒店',
+      navTitle:'途易国际酒店',
+      navImage:require("@/assets/images/cartoonist.png"),
     }
   },
-  created () {  },
+  created () {   },
   methods: {
     goBack(){
       this.$router.go(-1);
@@ -53,28 +54,33 @@ export default {
       float: left;
     }
     .hotelTitle{
-      font-size: 2.2rem;
-      margin-top: 1.3rem;
+      font-size: 2.5rem;
+      margin-top: 1.2rem;
     }
     .logioIcon{
-      width:5.2rem;
-      height:5.2rem;
+      width: 4.8rem;
+      height: 4.8rem;
       border-radius: 2.6rem;
-      background:#F39800;
-      margin:0.4rem .8rem 0 .8rem;
+      background: #F39800;
+      margin: 0.6rem 0.8rem 0 0.8rem;
+      overflow: hidden;
+      img{ 
+        width: 100%;
+        height:100%;
+      }
     }
     .goBack,.homePage{
-      float:right;
-      width: 8.6rem;
-      height: 4.2rem;
-      margin:.7rem 2rem 0 0;
+      float: right;
+      width: 8.2rem;
+      height: 4rem;
+      margin: 1.2rem 1.2rem 1.2rem 0;
     }
     .el-button{
-      font-size:1.6rem;
+      font-size:1.4rem;
       font-weight:normal;
     }
     .el-button.is-round{
-      border-radius: 1.6rem;
+      border-radius: 1rem;
     }
     .el-button--warning{
       color: #012625;
