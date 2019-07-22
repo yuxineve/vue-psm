@@ -72,7 +72,7 @@ export default {
     }
   },
   created () {
-    this.$store.commit("changeStatus", true);//展示下一页的按键
+    this.$store.commit("changeStatus", true);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
   },
   methods: {},

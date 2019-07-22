@@ -62,13 +62,11 @@ export default {
   created () {
     this.$store.commit("changeStatus", false);//隐藏下一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
-    console.log(this);
   },
   methods: {
     agreet(){
       this.$store.commit("changeDisclai", false);//隐藏免责
-      this.$store.commit("changeStatus", true);//展示上一步
-      console.log(this.$store);
+      this.$store.commit("changeStatus", false);//展示上一步
     },
     disAgreet(){
       this.$router.push('/index');
