@@ -37,32 +37,32 @@ export default new Router({
         {
           path: "orderRoom",
           name: "OrderRoom",
-          component: () => import("@/views/orderRoom")
+          component: () => import("@/views/order/orderRoom")
         },
         {
           path: "sceneRoom",
           name: "SceneRoom",
-          component: () => import("@/views/sceneRoom")
+          component: () => import("@/views/scene/sceneRoom")
         },
         {
           path: "groupRoom",
           name: "GroupRoom",
-          component: () => import("@/views/groupRoom")
+          component: () => import("@/views/group/groupRoom")
         },
         {
           path: "continuedRoom",
           name: "ContinuedRoom",
-          component: () => import("@/views/continuedRoom")
+          component: () => import("@/views/continu/continuedRoom")
         },
         {
           path: "checkoutRoom",
           name: "CheckoutRoom",
-          component: () => import("@/views/checkoutRoom")
+          component: () => import("@/views/checkout/checkoutRoom")
         },
         {
           path: "techrepublic",
           name: "Techrepublic",
-          component: () => import("@/views/techrepublic")
+          component: () => import("@/views/public/techrepublic")
         }
       ]
     }

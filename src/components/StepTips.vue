@@ -1,8 +1,8 @@
 <!--步骤提示条-->
 <template>
   <div id="StepTips">
-    <div v-for="(item,index) in siteStepText" :key="index" class="stepBorder">
-      <div class="numBox">{{item.num}}</div>
+    <div v-for="(item,index) in siteStepText" :key="index" class="stepBorder" :class="{stepBoxSelect:item.selectClass}">
+      <div class="numBox" :class="{stepNumSelect:item.selectClass}">{{item.num}}</div>
       <div class="textBox">{{item.text}}</div>
     </div>
   </div>
@@ -33,10 +33,11 @@ export default {
   right: 2rem;
   .stepBorder{
     width:15.6rem;
-    height: 4.4rem;
+    height: 4.2rem;
     border:1px solid rgba(3,231,231,0.4);
     float: left;
     border-radius: .8rem;
+    color: #CCCCCA;
     .numBox{
       width:5rem;
       height:4.4rem;
@@ -47,11 +48,11 @@ export default {
       text-align: center;
       line-height: 4.4rem;
       float: left;
+      margin-top: -0.1rem;
     }
     .textBox{
       float: right;
       font-size: 2.2rem;
-      color: #CCCCCA;
       width: 10.6rem;
       height: 100%;
       line-height: 4.4rem;

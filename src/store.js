@@ -8,26 +8,31 @@ export default new Vuex.Store({
     count: 120,
     seenGoBack: true,
     seenHome: false,
-    siteStepTextState: [
+    siteStepTextState: [//现场入住step
       {
         text: "选择房型",
-        num: "01"
+        num: "01",
+        selectClass: true
       },
       {
         text: "办理入住",
-        num: "02"
+        num: "02",
+        selectClass: false
       },
       {
         text: "验证身份",
-        num: "03"
+        num: "03",
+        selectClass: false
       },
       {
         text: "支付费用",
-        num: "04"
+        num: "04",
+        selectClass: false
       },
       {
         text: "制作房卡",
-        num: "05"
+        num: "05",
+        selectClass: false
       }
     ]
   },
