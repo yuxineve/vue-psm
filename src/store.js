@@ -8,7 +8,9 @@ export default new Vuex.Store({
     count: 120,
     seenGoBack: true,
     seenHome: false,
-    siteStepTextState: [//现场入住step
+    IsDisclaiDisplay: true,//展示免责
+    siteStepTextState: [
+      //现场入住step
       {
         text: "选择房型",
         num: "01",
@@ -48,6 +50,9 @@ export default new Vuex.Store({
     },
     changeHomeStatus(state, flag) {
       state.seenHome = flag;
+    },
+    changeDisclai(state,flag) {
+      state.IsDisclaiDisplay = flag;
     }
   },
   actions: {}

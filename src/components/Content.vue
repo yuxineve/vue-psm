@@ -1,6 +1,6 @@
 <!--免责文案-->
 <template>
-  <div id="Content" class="contentView" :class="{Dispaly:isDispaly}">
+  <div id="Content" class="contentView" v-if="this.$store.state.IsDisclaiDisplay">
     <div class="contentBox">
       <div class="Disclaimer">
         <div class="title">自助值房机使用须知</div>
@@ -56,17 +56,19 @@ export default {
   name: 'Content',
   data () {
     return {
-      isDispaly:false,
+      // isDispaly:false,
     }
   },
   created () {
-    this.$store.commit("changeStatus", false);//展示下一页的按键
+    this.$store.commit("changeStatus", false);//隐藏下一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
+    console.log(this);
   },
   methods: {
     agreet(){
-      this.isDispaly = true;
-      this.$store.commit("changeStatus", true);
+      this.$store.commit("changeDisclai", false);//隐藏免责
+      this.$store.commit("changeStatus", true);//展示上一步
+      console.log(this.$store);
     },
     disAgreet(){
       this.$router.push('/index');
@@ -99,12 +101,6 @@ export default {
     text-align: center;
     margin: 2.2rem 0 0rem 0rem;
     font-size:3rem;
-    div.title{ 
-      // margin:2.2rem 0 1.9rem 21.8rem;
-      // position: absolute;
-      // left: calc(50% - 13.5rem);
-      // margin:2.2rem 0 1.9rem 0;
-    }
   }
   .contentText{
     font-size: 1.2rem;

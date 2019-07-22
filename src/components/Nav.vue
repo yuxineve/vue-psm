@@ -34,6 +34,7 @@ export default {
     },
     homePage(){
       this.$router.push('/index');
+      this.$store.commit("changeDisclai", true);//展示免责
     }
   },
   computed: {},

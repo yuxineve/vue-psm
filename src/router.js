@@ -45,6 +45,11 @@ export default new Router({
           component: () => import("@/views/scene/sceneRoom")
         },
         {
+          path: "checkIn",
+          name: "CheckIn",
+          component: () => import("@/views/scene/checkIn")
+        },
+        {
           path: "groupRoom",
           name: "GroupRoom",
           component: () => import("@/views/group/groupRoom")

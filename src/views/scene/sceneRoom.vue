@@ -11,11 +11,13 @@
     </div>
     <div class="roomType">
       <div v-for="(item,index) in roomType" class="roomBorder" :key="index">
-        <div class="roomPhoto"><img :src="item.img" />></div>
-        <div class="priceBottom">
-          <span>{{item.title}}</span>
-          <span>{{item.price}}/天</span>
-        </div>
+        <router-link :to="{ name: 'CheckIn', query:{id: item.id}}">
+          <div class="roomPhoto"><img :src="item.img" />></div>
+          <div class="priceBottom">
+            <span>{{item.title}}</span>
+            <span>{{item.price}}/天</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,30 +37,37 @@ export default {
         title:'标准主题房',
         img:require("@/assets/images/login.jpg"),
         price:'100',
+        id:1,
       },{
         title:'标准主题房',
         img:require("@/assets/images/adImgLevel-2/ad1.jpg"),
         price:'100',
+        id:2,
       },{
         title:'标准主题房',
         img:require("@/assets/images/1.jpg"),
         price:'100',
+        id:3
       },{
         title:'标准主题房',
         img:require("@/assets/images/1.jpg"),
         price:'100',
+        id:4
       },{
         title:'标准主题房',
         img:require("@/assets/images/1.jpg"),
         price:'100',
+        id:5,
       },{
         title:'标准主题房',
         img:require("@/assets/images/1.jpg"),
         price:'100',
+        id:6,
       },{
         title:'标准主题房',
         img:require("@/assets/images/1.jpg"),
         price:'100',
+        id:7,
       }]
     }
   },
