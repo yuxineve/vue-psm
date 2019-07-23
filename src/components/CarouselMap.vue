@@ -3,7 +3,7 @@
   <div id="CarouselMap">
     <ul>
       <li>
-          <img v-for="(item,index) in carouselData.carouselImg" :key="index" :src="item.img" :alt="item.title" :class="{active:index == num}">
+          <img v-for="(item,index) in carouselData.carouselImg" :key="index" :src="item.img" :alt="item.title" :class="{activeImg:index == num}">
       </li>
     </ul>
   </div>
@@ -49,7 +49,7 @@ export default {
     opacity: 0;
     transition: all 1s;
   }
-  .active{
+  .activeImg{
     opacity: 1;
     transition: all 1s;
   }
