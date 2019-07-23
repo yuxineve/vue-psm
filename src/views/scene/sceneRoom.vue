@@ -25,8 +25,13 @@
 
 <script>
 import '@/assets/style/common.less';
+
+import Vue from "vue"
 import DisclaimerContent from "@/components/Content"
 import StepTips from "@/components/StepTips"
+import { Button } from "element-ui"
+
+Vue.use(Button);
 
 export default {
   name: 'SceneRoom',
