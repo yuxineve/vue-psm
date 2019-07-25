@@ -10,7 +10,7 @@
     </div>
     <div class="boxFlex" :class="{opacityHidden:isOpacity}">
       <div class="title"><span>身份证扫描</span></div>
-      <div class="img" v-if="isIdentify">
+      <div class="img" v-if="isIdentifyIDCard">
         <img :src="IDCardImg"/>
       </div>
       <div class="img" v-else>
@@ -26,27 +26,46 @@
       <div class="img">
         <img :src="faceImg"/>
       </div>
-      <el-button type="success" v-if="!config.IsValid" @click="facedNext">下一步</el-button>
+      <el-button type="success" v-if="!config.IsValid" @click="facedNext">录入人脸</el-button>
     </div>
-    <div v-if="isOpacity" class="weChatPay">
+    <div class="camera"  v-if="isOpacity && isIdentifyFace">
+      <div><span>请对准摄像头</span></div>
+      <div class="faceRecognition">
+        <div></div>
+      </div>
+      <el-button style="margin:1rem 0 0 28rem" type="success" v-if="!config.IsValid" @click="payNext">请支付</el-button>
+    </div>
+    <div v-if="isOpacity && !isIdentifyFace" class="weChatPay">
       <div>
         <div><span>请使用微信扫描支付</span></div>
         <div class="wePayBorder">
           <img src="../../assets/images/wechat.png"/>
         </div>
       </div>
-      <el-button type="warning">警告按钮</el-button>
+      <router-link :to="{name : 'MakeCard'}">
+        <el-button type="warning">完成支付</el-button>
+      </router-link>
     </div>
     <div class="boxFlex" style="background:rgba(3, 231, 231, 0.4)">
-      <div class="title"><span>订单详情</span></div>
-      <div class="img">
-        <div class="orderImg"><img :src="orderImg"/></div>
-        <div class="orderDetail">
-          <span>房型：主题房</span>
-          <span>房间：主题房</span>
-          <span>总价：主题房</span>
+      <span v-if="!isIdentifyFace">
+        <div class="title"><span>订单详情</span></div>
+        <div class="img" style="overflow:visible">
+          <div class="orderImg"><img :src="orderImg"/></div>
+          <div class="orderDetail" style="padding:1.2rem 4rem;width:10rem;">
+            <span>房型：主题房</span>
+            <span>房间：主题房</span>
+            <span>总价：主题房</span>
+          </div>
         </div>
-      </div>
+      </span>
+      <span v-else>
+        <div class="cameraPosition">
+          <div class="title"><span>摄像头位置</span></div>
+          <div class="img">
+            <img :src="faceImg"/>
+          </div>
+        </div>
+      </span>
     </div>
   </div>
 </template>
@@ -57,6 +76,7 @@ import Vue from "vue"
 import StepTips from "@/components/StepTips"
 import { Button } from "element-ui"
 import cfg from "@/config/index.js"
+import common from "@/utils/common.js"
 
 Vue.use(Button);
 
@@ -71,18 +91,42 @@ export default {
       IDCardImged:require("@/assets/images/1.jpg"),
       faceImg:require("@/assets/images/1.jpg"),
       orderImg:require("@/assets/images/1.jpg"),
-      isIdentify:false,//是否识别完成
+      isIdentifyIDCard:false,//IDCard是否识别完成
+      isIdentifyFace:false,//人脸是否识别完成
       name:'于小朵',
       IDCard:'230524199807022520',
     }
   },
   created () {
+    this.name = common.sensitString(this.name,0,1,'*');
+    this.IDCard = common.sensitString(this.IDCard,4,4,'*');
     this.$store.commit("changeStatus", true);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
+    this.siteStepText.map((val,key) => {
+      if(key <= 2){
+        val.selectClass = true;
+      }else{
+        val.selectClass = false;
+      }
+      return val;
+    })
   },
   methods: {
     facedNext(){
       this.isOpacity = true;
+      this.isIdentifyFace = true;
+    },
+    payNext(){
+      this.isOpacity = true;
+      this.isIdentifyFace = false;
+      this.siteStepText.map((val,key) => {
+        if(key <= 3){
+          val.selectClass = true;
+        }else{
+          val.selectClass = false;
+        }
+        return val;
+      })
     }
   },
   computed: {},
@@ -167,6 +211,35 @@ export default {
   .boxFlex,.leftTips{
     margin-top: 15.8rem;
   }
+  .camera{
+    width:52rem;
+    height:35.2rem;
+    position: absolute;
+    top: 13.2rem;
+    left: calc(50% - 26rem);
+    :first-child{
+      width:100%;
+      text-align: center;
+      color: #FBFEFE;
+      font-size: 2rem;
+    }
+    .faceRecognition{
+      width:34.8rem;
+      height:22.8rem;
+      margin:2rem 7rem;;
+      background:rgba(255,255,255,0.25);
+      opacity: 1;
+      border-radius: 1rem;
+      padding:1.5rem;
+      > div{
+        width:34.8rem;
+        height:22.8rem;
+        background: #FFFFFF;
+        border-radius:1rem;
+      }
+    }
+  }
+
   .weChatPay{
     position: absolute;
     background: #FBFEFE;

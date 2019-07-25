@@ -55,6 +55,11 @@ export default new Router({
           component: () => import("@/views/scene/verifyIdentidy")
         },
         {
+          path: "makeCard",
+          name: "MakeCard",
+          component: () => import("@/views/scene/makeCard")
+        },
+        {
           path: "groupRoom",
           name: "GroupRoom",
           component: () => import("@/views/group/groupRoom")
