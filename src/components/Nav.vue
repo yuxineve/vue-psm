@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       navTitle:'途易国际酒店',
-      navImage:require("@/assets/images/cartoonist.png"),
+      navImage:require("@/assets/images/logo.png"),
     }
   },
   created () {   },

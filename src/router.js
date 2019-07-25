@@ -50,6 +50,11 @@ export default new Router({
           component: () => import("@/views/scene/checkIn")
         },
         {
+          path: "verifyIdentidy",
+          name: "VerifyIdentidy",
+          component: () => import("@/views/scene/verifyIdentidy")
+        },
+        {
           path: "groupRoom",
           name: "GroupRoom",
           component: () => import("@/views/group/groupRoom")

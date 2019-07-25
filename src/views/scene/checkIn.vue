@@ -29,7 +29,18 @@
               <ul class="clearfix">
                 <li v-for="(item,index) in selectNumD" :key="index" :class="{'active':IsActiveD == index}" @click="handleActiveD(index)">{{item}}</li>
               </ul>
-              <label v-show="IsActiveD == 5">入离时间：2019.07.11 - 2019.07.14</label>
+              <label v-show="IsActiveD == 5">
+                <el-date-picker
+                  v-model="dateValue"
+                  type="daterange"
+                  @change="changeDate"
+                  :picker-options="pickerOptions"
+                  value-format="yyyy-MM-dd"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期">
+                </el-date-picker>
+              </label>
             </div>
           </div>
         </div>
@@ -44,7 +55,9 @@
             </div>
           </div>
           <div class="sureBtn">
-            <el-button type="warning">确认入住</el-button>
+            <router-link :to="{ name: 'VerifyIdentidy'}">
+              <el-button type="warning" class="makeSureRoomed">确认入住</el-button>
+            </router-link>
             <el-button>总价：{{totlePrice}}元</el-button>
           </div>
         </div>
@@ -53,7 +66,6 @@
         <div>
           <el-carousel :interval="5000" arrow="always" indicator-position="outside" height="13.8rem">
             <el-carousel-item v-for="(item,index) in cardImg" :key="index">
-              <!-- <h3>{{ item }}</h3> -->
               <img :src="item.img">
             </el-carousel-item>
           </el-carousel>
@@ -90,11 +102,12 @@
 import Vue from "vue"
 import '@/assets/style/common.less';
 import StepTips from "@/components/StepTips"
-import { Button, Carousel, CarouselItem } from "element-ui"
+import { Button, Carousel, CarouselItem, DatePicker,  } from "element-ui"
 
 Vue.use(Button);
 Vue.use(Carousel);
 Vue.use(CarouselItem);
+Vue.use(DatePicker);
 
 export default {
   name: 'CheckIn',
@@ -102,6 +115,7 @@ export default {
     return {
       siteStepText:this.$store.state.siteStepTextState,
       totlePrice:'3000',
+      dateValue:'',
       selectNumP:['1人','2人','3人','4人'],
       selectNumD:['1天','2天','3天','4天','5天','其他'],
       priceDetail:[{
@@ -132,7 +146,12 @@ export default {
         },{
           img: require("@/assets/images/adImgLevel-2/ad3.jpg"), 
           title:'1'
-        }]
+        }],
+        pickerOptions:{
+          disabledDate (time) {
+              return time.getTime() < new Date(new Date().toLocaleDateString()).getTime();
+          },
+        }
     }
   },
   created () {
@@ -145,6 +164,9 @@ export default {
     },
     handleActiveD(index){//选择天数
       this.IsActiveD = index;
+    },
+    changeDate(){
+        console.log('dateValue:',this.dateValue)
     }
   },
   computed: {},
@@ -174,7 +196,7 @@ export default {
     }
     .selectPeople,.selectDate{
       margin-left:1rem;
-      span{
+      > span{
         font-size: 2.6rem;
       }
       .selectNum{
@@ -192,12 +214,35 @@ export default {
         cursor: pointer;
       }
       .selectNum > label{
+        width:28.8rem;
+        height:3rem;
         font-size: 1.8rem;
         border:.1rem solid #F39800;
         border-radius: .5rem;
         margin-top:.7rem;
         display:inline-block;
         padding: .2rem .4rem;
+        .el-date-editor--daterange.el-input__inner{
+          width: 100%;
+          color: #F8F9FB;
+        }
+        .el-date-editor .el-range__icon,.el-date-editor .el-range__close-icon{
+          line-height:2.4rem;
+        }
+        .el-input__inner{
+          background:none;
+          border:none;
+          height:3rem;
+          line-height: 3rem;
+        }
+        input{
+          background:none;
+          color: #F8F9FB;
+        }
+        .el-date-editor .el-range-separator{
+          color: #F8F9FB;
+          line-height: 2.4rem;
+        }
       }
     }
     .roomPrice{
@@ -237,6 +282,18 @@ export default {
   }
   .addHeight{
     height:11.4rem;
+    position:relative;
+    // .selectCalinder{
+    //   width: 30rem;
+    //   height: 24rem;
+    //   background: #03E7E7;
+    //   position: absolute;
+    //   border: 0.1rem solid #F39800;
+    //   border-radius: 1rem;
+    //   top: -10rem;
+    //   left: 38rem;
+    //   z-index: 99;
+    // }
   }
   .sureBtn{
     width: 13rem;
@@ -350,6 +407,10 @@ export default {
         overflow: hidden;
       }
     }
+  }
+  .makeSureRoomed{
+    background:#F39800!important;
+    color: #012625!important;
   }
 }
 </style>

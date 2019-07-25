@@ -4,7 +4,7 @@
     <div class="welcome">
       <div>
         <div>欢迎使用酒店智能入住终端</div>
-        <div style="border:0.2rem solid #03E7E7;width:100%;margin-top:2.2rem"></div>
+        <div class="lace"></div>
       </div>
     </div>
     <div class="leftTips">
@@ -15,24 +15,24 @@
     </div>
     <div class="btnSquare">
       <router-link :to="{ name: 'OrderRoom'}" >
-        <div class="mainBtn">订单取房</div>
+        <div class="mainBtn"></div>
       </router-link>
       <router-link :to="{ name: 'SceneRoom'}">
-        <div class="mainBtn">现场订房</div>
+        <div class="mainBtn"></div>
       </router-link>
       <router-link :to="{ name: 'GroupRoom'}">
-        <div  class="mainBtn">团队入住</div>
+        <div  class="mainBtn"></div>
       </router-link>
     </div>
     <div class="BtnRound">
       <router-link :to="{ name: 'ContinuedRoom'}" class="subBtn">
-        <div>续房</div>
+        <div></div>
       </router-link>
       <router-link :to="{ name: 'CheckoutRoom'}" class="subBtn">
-        <div>退房</div>
+        <div></div>
       </router-link>
       <router-link :to="{ name: 'Techrepublic'}" class="subBtn">
-        <div>公安验证</div>
+        <div></div>
       </router-link>
     </div>
   </div>
@@ -71,46 +71,72 @@ export default {
     font-size: 3.6rem;
     color: #FDFDFD;
     width: 100%;
-    // position: absolute;
-    // top: 7.6rem;
-    // left: calc(50% - 216px);
     float: left;
     text-align: center;
+    .lace{
+      background:url('~@/assets/images/border.png') center center no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 3.4rem;
+      margin-top: 1rem;
+    }
   }
   .welcome > div {
     width: 43.2rem;
-    margin:7.6rem 0 0 32.4rem;
+    margin:7.6rem 0 0 33.8rem;
   }
   .btnSquare{
-    // position: absolute;
-    // right: 27.2rem;
-    // top: 19.6rem;
     float: left;
-    margin: 6rem 0 0 -3.4rem;
+    margin: 4rem 0 0 -3.4rem;
+    :nth-child(1) .mainBtn{
+      background:url('~@/assets/images/order.png') center center no-repeat;
+      background-size: cover;
+    }
+    :nth-child(2) .mainBtn{
+      background:url('~@/assets/images/site.png') center center no-repeat;
+      background-size: cover;
+    }
+    :nth-child(3) .mainBtn{
+      background:url('~@/assets/images/group.png') center center no-repeat;
+      background-size: cover;
+    }
     .mainBtn{
       width:12rem;
       height:20rem;
       text-align: center;
-      background:#F39800;
+      // background:#F39800;
       float: left;
       margin-left: 7.4rem;
     }
   }
   .BtnRound{
-    width: 30rem;
+    width: 33rem;
     position:absolute;
     right: 4rem;
     bottom: 2.8rem;
     .subBtn{
-      width:8rem;
-      height:8rem;
       border-radius: 4rem;
       text-align: center;
-      background:#F39800;
       float:left; 
+      div{
+        width:9rem;
+        height:9rem;
+      }
     }
     .subBtn:not(:first-of-type){
       margin-left: 3rem;
+    }
+    :nth-child(1) div{
+      background:url('~@/assets/images/continu.png') center center no-repeat;
+      background-size: cover;
+    }
+    :nth-child(2) div{
+      background:url('~@/assets/images/checkOut.png') center center no-repeat;
+      background-size: cover;
+    }
+    :nth-child(3) div{
+      background:url('~@/assets/images/public.png') center center no-repeat;
+      background-size: cover;
     }
   }
 
