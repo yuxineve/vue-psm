@@ -33,7 +33,7 @@
       <div class="faceRecognition">
         <div></div>
       </div>
-      <el-button style="margin:1rem 0 0 28rem" type="success" v-if="!config.IsValid" @click="payNext">请支付</el-button>
+      <el-button style="margin:10px 0 0 280px" type="success" v-if="!config.IsValid" @click="payNext">请支付</el-button>
     </div>
     <div v-if="isOpacity && !isIdentifyFace" class="weChatPay">
       <div>
@@ -51,7 +51,7 @@
         <div class="title"><span>订单详情</span></div>
         <div class="img" style="overflow:visible">
           <div class="orderImg"><img :src="orderImg"/></div>
-          <div class="orderDetail" style="padding:1.2rem 4rem;width:10rem;">
+          <div class="orderDetail" style="padding:12px 40px;width:100px;">
             <span>房型：主题房</span>
             <span>房间：主题房</span>
             <span>总价：主题房</span>
@@ -142,40 +142,40 @@ export default {
     opacity:0.2;
   }
   .boxFlex{
-    width:22rem;
-    height:30rem;
+    width:220px;
+    height:300px;
     background:rgba(3, 231, 231, 0.25);
-    border-radius: 1.4rem;
+    border-radius: 14px;
   }
   .boxFlex{
     float:left;
-    margin-left:4rem;
+    margin-left:40px;
     > .el-button--success{
-      margin-top:4rem;
+      margin-top:40px;
     }
     .title{
       width:100%;
       color: #F8F9FB;
-      font-size: 2rem;
+      font-size: 20px;
       text-align: center;
-      height: 5rem;
-      line-height: 5rem;
+      height: 50px;
+      line-height: 50px;
     }
     .img{
-      width:19rem;
-      height: 21.8rem;
-      border-radius: 1rem;
+      width:190px;
+      height: 218px;
+      border-radius: 10px;
       overflow: hidden;
-      margin:.5rem 0 0 1.5rem;
+      margin:5px 0 0 15px;
       > img{ 
         width: 100%;
         height: 100%;
         overflow: hidden;
       }
       .orderImg,.IDCardImged{
-        width:19rem;
-        height:11.4rem;
-        border-radius: 1rem;
+        width:190px;
+        height:114px;
+        border-radius: 10px;
         overflow: hidden;
         > img{
           width:100%;
@@ -184,58 +184,58 @@ export default {
       }
       .orderDetail,.IDCardDetail{
         width: 100%;
-        height: 10rem;
-        padding:0.2rem 4rem;
+        height: 100px;
+        padding:2px 40px;
         > span{
           display: inline-block;
-          width:9rem;
-          height:2.6rem;
-          border: .1rem solid #03D4E7;
-          font-size: 1.2rem;
+          width:90px;
+          height:26px;
+          border: 1px solid #03D4E7;
+          font-size: 12px;
           color:#FAFAFB;
-          border-radius: .5rem;
-          line-height: 2.6rem;
-          margin-bottom: .6rem;
-          padding:0 .5rem;
+          border-radius: 5px;
+          line-height: 26px;
+          margin-bottom: 6px;
+          padding:0 5px;
         }
       }
       .IDCardDetail{
-        padding:2.4rem 0.3rem 0.2rem;
+        padding:24px 3px 2px;
         > span{
-          width: 17rem;
-          margin-bottom: 1.2rem;
+          width: 170px;
+          margin-bottom: 12px;
         }
       }
     }
   }
   .boxFlex,.leftTips{
-    margin-top: 15.8rem;
+    margin-top: 158px;
   }
   .camera{
-    width:52rem;
-    height:35.2rem;
+    width:520px;
+    height:352px;
     position: absolute;
-    top: 13.2rem;
-    left: calc(50% - 26rem);
+    top: 132px;
+    left: calc(50% - 260px);
     :first-child{
       width:100%;
       text-align: center;
       color: #FBFEFE;
-      font-size: 2rem;
+      font-size: 20px;
     }
     .faceRecognition{
-      width:34.8rem;
-      height:22.8rem;
-      margin:2rem 7rem;;
+      width:348px;
+      height:228px;
+      margin:20px 70px;
       background:rgba(255,255,255,0.25);
       opacity: 1;
-      border-radius: 1rem;
-      padding:1.5rem;
+      border-radius: 10px;
+      padding:15px;
       > div{
-        width:34.8rem;
-        height:22.8rem;
+        width:348px;
+        height:228px;
         background: #FFFFFF;
-        border-radius:1rem;
+        border-radius:10px;
       }
     }
   }
@@ -243,36 +243,36 @@ export default {
   .weChatPay{
     position: absolute;
     background: #FBFEFE;
-    width: 20rem;
-    height: 28.2rem;
-    border-radius: 0.5rem;
-    top: 15.5rem;
-    left: calc(50% - 10.4rem);
-    padding:.8rem;
+    width: 200px;
+    height: 282px;
+    border-radius: 5px;
+    top: 155px;
+    left: calc(50% - 104px);
+    padding:8px;
     > div{
-      width: 20rem;
-      height: 22rem;
+      width: 200px;
+      height: 220px;
       background: #23A93A;
-      margin-bottom: 1.4rem;
-      border-radius: .5rem .5rem 0 0;
+      margin-bottom: 14px;
+      border-radius: 5px 5px 0 0;
       > div{
         color:#FBFEFE;
-        font-size: 2rem;
+        font-size: 20px;
         text-align: center;
-        padding: 1rem 0;
+        padding: 10px 0;
       }
     }
     .wePayBorder{
-      width: 15rem;
-      height:15rem;
+      width: 150px;
+      height:150px;
       background:url(~@/assets/images/weBorder.png) center center no-repeat;
       background-size: cover;
       padding:0;
-      margin: .5rem 2.4rem;
+      margin: 5px 24px;
       > img{ 
         width:90%;
         height:90%;
-        margin-top:.6rem;
+        margin-top:6px;
       }
     }
     .el-button--warning{
@@ -282,7 +282,7 @@ export default {
     }
     .el-button{ 
       padding:17px 20px;
-      border-radius:0 0 .5rem .5rem;
+      border-radius:0 0 5px 5px;
     }
   }
 }

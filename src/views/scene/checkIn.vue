@@ -64,7 +64,7 @@
       </div>
       <div class="roomImg">
         <div>
-          <el-carousel :interval="5000" arrow="always" indicator-position="outside" height="13.8rem">
+          <el-carousel :interval="5000" arrow="always" indicator-position="outside" height="138px">
             <el-carousel-item v-for="(item,index) in cardImg" :key="index">
               <img :src="item.img">
             </el-carousel-item>
@@ -188,60 +188,60 @@ export default {
 #CheckIn {
   color:#333;
   .leftTips,.roomMsg{
-    margin-top:15.6rem;
+    margin-top:156px;
   }
   .roomMsg,.roomMsg > div,.bundle> div,.selectNum li,.sureBtn .el-button{
     float: left;
   }
   .roomMsg{
     color: #F8F9FB;
-    margin: 11rem 0 0 6rem;
+    margin: 110px 0 0 60px;
     .peopleoImg,.dayNumImg{
-      width: 5.6rem;
-      height:5.6rem;
+      width: 56px;
+      height:56px;
       background:#03C3C3;
-      border-radius: 1rem;
+      border-radius: 10px;
     }
     .selectPeople,.selectDate{
-      margin-left:1rem;
+      margin-left:10px;
       > span{
-        font-size: 2.6rem;
+        font-size: 26px;
       }
       .selectNum{
-        margin-top: 1rem;
+        margin-top: 10px;
       }
       .selectNum li{
-        font-size: 1.6rem;
-        border-radius: .5rem;
+        font-size: 16px;
+        border-radius: 5px;
         border: 1px solid #03D4E7;
-        width:4rem;
-        height:3rem;
+        width:40px;
+        height:30px;
         text-align: center;
-        line-height: 3rem;
-        margin-right: 1rem;
+        line-height: 30px;
+        margin-right: 10px;
         cursor: pointer;
       }
       .selectNum > label{
-        width:28.8rem;
-        height:3rem;
-        font-size: 1.8rem;
-        border:.1rem solid #F39800;
-        border-radius: .5rem;
-        margin-top:.7rem;
+        width:288px;
+        height:30px;
+        font-size: 18px;
+        border:1px solid #F39800;
+        border-radius: 5px;
+        margin-top:7px;
         display:inline-block;
-        padding: .2rem .4rem;
+        padding: 2px 4px;
         .el-date-editor--daterange.el-input__inner{
           width: 100%;
           color: #F8F9FB;
         }
         .el-date-editor .el-range__icon,.el-date-editor .el-range__close-icon{
-          line-height:2.4rem;
+          line-height:24px;
         }
         .el-input__inner{
           background:none;
           border:none;
-          height:3rem;
-          line-height: 3rem;
+          height:30px;
+          line-height: 30px;
         }
         input{
           background:none;
@@ -249,36 +249,36 @@ export default {
         }
         .el-date-editor .el-range-separator{
           color: #F8F9FB;
-          line-height: 2.4rem;
+          line-height: 24px;
         }
       }
     }
     .roomPrice{
       background:rgba(3,212,231,0.25);
-      width:19.6rem;
-      height:20rem;
-      border-radius: 1rem;
+      width:196px;
+      height:200px;
+      border-radius: 10px;
       .priceTitle{
         width:100%;
-        font-size:2rem;
+        font-size:20px;
         text-align: center;
-        padding: 0.6rem 0;
+        padding: 6px 0;
       }
       .priceDate{
-        height: 15rem;
+        height: 150px;
         overflow-y: auto;
-        margin:.6rem .7rem;
+        margin:6px 7px;
       }
       .priceDate > div > label,.priceDate > div > span{
-        border:.1rem solid #03D4E7;
-        border-radius: .5rem;
+        border:1px solid #03D4E7;
+        border-radius: 5px;
         display:inline-block;
-        width:7.6rem;
-        height:3rem;
+        width:76px;
+        height:30px;
         text-align: center;
-        line-height: 3rem;
-        margin: 0 1.2rem .6rem 0;
-        font-size:1.8rem;
+        line-height: 30px;
+        margin: 0 12px 6px 0;
+        font-size:18px;
       }
       .priceDate > div > span{ 
         color:#F39800;
@@ -286,35 +286,24 @@ export default {
     }
   }
   .bundle{
-    margin-bottom: 2.5rem;
+    margin-bottom: 25px;
   }
   .addHeight{
-    height:11.4rem;
+    height:114px;
     position:relative;
-    // .selectCalinder{
-    //   width: 30rem;
-    //   height: 24rem;
-    //   background: #03E7E7;
-    //   position: absolute;
-    //   border: 0.1rem solid #F39800;
-    //   border-radius: 1rem;
-    //   top: -10rem;
-    //   left: 38rem;
-    //   z-index: 99;
-    // }
   }
   .sureBtn{
-    width: 13rem;
+    width: 130px;
     text-align: center;
-    padding: 4rem;
+    padding: 40px;
     .el-button+.el-button{
-      margin-left:0rem;
+      margin-left:0;
     }
     .el-button{
-      width:14.2rem;
-      height: 4.8rem;
-      margin-top:2rem;
-      font-size: 2rem;
+      width:142px;
+      height: 48px;
+      margin-top:20px;
+      font-size: 20px;
     }
   }
   .sureBtn .el-button:first-child{
@@ -322,72 +311,72 @@ export default {
     
   }
   .sureBtn .el-button:last-child{
-    font-size:1.8rem!important;
+    font-size:18px!important;
     background: none;
     color: #fff;
-    border:.1rem solid #F39800;
+    border:1px solid #F39800;
   }
   .roomImg{
     background:rgba(3,212,231,0.4);
-    width:25rem;
-    height: 32rem;
-    border-radius:1rem;
-    margin:7rem 0 0 4rem;
+    width:250px;
+    height: 320px;
+    border-radius:1px;
+    margin:70px 0 0 40px;
     img{
       width:100%;
       height:100%;
     }
     .el-carousel__arrow{
-      width:2rem;
-      height:2rem;
+      width:20px;
+      height:20px;
     }
     .el-carousel__button{
-      width:1.8rem;
+      width:18px;
     }
   }
   .roomImg > div:first-child{
-    padding:1rem 1rem 0 1rem;
+    padding:10px 10px 0 10px;
     overflow: hidden;
     .el-carousel div{
-      width: 23rem;
-      border-radius: 1rem;
+      width: 230px;
+      border-radius: 10px;
     }
   }
   .roomImg > div:last-child{ 
     color: #FAFAFB;
     .roomTitle{
-      font-size:2rem;
+      font-size:20px;
       width:100%;
       text-align:center;
     }
   }
   .roomImgDetail > div{
     float:left;
-    width:10.2rem;
-    height: 9.2rem;
+    width:102px;
+    height: 92px;
   }
   .roomImgDetail > div:first-child{
-    margin-right:1.4rem;
+    margin-right:14px;
   }
   .roomImgDetail > div:last-child{
-    border:.1rem solid #03D4E7;
-    border-radius: .5rem;
+    border:1px solid #03D4E7;
+    border-radius: 5px;
   }
   .roomImgDetail{
-    margin:1rem 0 0 1.5rem;
+    margin:10px 0 0 15px;
     .threeMsg div{
-      width: 10rem;
-      height:2.3rem;
+      width: 100px;
+      height:23px;
       border: 1px solid #03D4E7;
-      border-radius: .5rem;
-      margin-bottom: .4rem;
-      line-height: 2.3rem;
-      padding:.2rem .6rem;
+      border-radius: 5px;
+      margin-bottom: 4px;
+      line-height: 23px;
+      padding:2px 6px;
       span{
-        font-size:1.2rem;
+        font-size:12px;
       }
       label{
-        font-size: 1rem;
+        font-size: 10px;
       }
     }
     .threeMsg div.vehicle{
@@ -397,18 +386,18 @@ export default {
       > label{
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: 5.8rem;
+        width: 58px;
         overflow: hidden;
       }
     }
     .remark{
       overflow: hidden;
-      padding: .5rem;
+      padding: 5px;
       > span:first-child{
-        font-size:1.2rem;
+        font-size:12px;
       }
       > span:last-child{
-        font-size:1rem;
+        font-size:10px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 6;

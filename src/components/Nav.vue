@@ -49,21 +49,21 @@ export default {
   color: #333;
   .nav{
     width:100%;
-    height:6rem;
+    height:60px;
     background:#03C3C4;
     .logioLeft div{
       float: left;
     }
     .hotelTitle{
-      font-size: 2.5rem;
-      margin-top: 1.2rem;
+      font-size: 25px;
+      margin-top: 12px;
     }
     .logioIcon{
-      width: 4.8rem;
-      height: 4.8rem;
-      border-radius: 2.6rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 26px;
       background: #F39800;
-      margin: 0.6rem 0.8rem 0 0.8rem;
+      margin: 6px 8px 0 8px;
       overflow: hidden;
       img{ 
         width: 100%;
@@ -72,16 +72,16 @@ export default {
     }
     .goBack,.homePage{
       float: right;
-      width: 8.2rem;
-      height: 4rem;
-      margin: 1.2rem 1.2rem 1.2rem 0;
+      width: 82px;
+      height: 40px;
+      margin: 12px 12px 12px 0;
     }
     .el-button{
-      font-size:1.4rem;
+      font-size:14px;
       font-weight:normal;
     }
     .el-button.is-round{
-      border-radius: 1rem;
+      border-radius: 10px;
     }
     .el-button--warning{
       color: #012625;

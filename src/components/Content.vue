@@ -84,48 +84,45 @@ export default {
 #Content {
   color: #F9FCFC;
   z-index: 1;
-  padding:0 19rem;
+  padding:0 190px;
   .contentBox{
-    // width:70rem;
-    height:56rem;
+    height:560px;
     background: rgba(67,67,67,0.5);
-    border-radius: 0 0 1rem 1rem;
-    // margin-left: 19rem;
+    border-radius: 0 0 10px 10px;
     position: relative;
   }
   .Disclaimer{
     position:absolute;
     width: 100%;
     text-align: center;
-    margin: 2.2rem 0 0rem 0rem;
-    font-size:3rem;
+    margin: 22px 0 0 0;
+    font-size:30px;
   }
   .contentText{
-    font-size: 1.2rem;
-    // width: 61.4rem;
-    height: 41.4rem;
+    font-size: 12px;
+    height: 414px;
     overflow-y: auto;
     position: absolute;
-    top: 5rem;
-    padding: 0 3.6rem;
+    top: 50px;
+    padding: 0 36px;
     text-align: left;
   }
   .bottomBtn{
     position: absolute;
-    bottom: 2.6rem;
+    bottom: 26px;
     width:100%;
     .el-button--warning{
       color: #012625;
       font-size: 18px;
     }
     .el-button--warning.is-plain{
-      width: 13.2rem;
-      height: 4.36rem;
-      margin-left: 10.9rem;
+      width: 132px;
+      height: 43.6px;
+      margin-left: 109px;
     }
     button:last-child{
       position:absolute;
-      right:10.9rem;
+      right:109px;
     }
   }
 }

@@ -99,46 +99,46 @@ export default {
 <style lang="less">
 #SceneRoom {
   .leftTips{
-    margin-top:15.6rem;
+    margin-top:156px;
   }
   .roomType{
-    width: 75.6rem;//753
-    height: 42rem;//408
+    width: 756px;//753
+    height: 420px;//408
     position: absolute;
-    bottom: 4rem;
-    right:2rem;
+    bottom: 40px;
+    right:20px;
     overflow-x:hidden;
     overflow-y: auto; 
     .roomPhoto{
-      width:22rem;
-      height:14rem;
-      border-radius:1rem;
+      width:220px;
+      height:140px;
+      border-radius:10px;
       overflow: hidden;
       img{
-        width: 22rem;
-        height: 14rem;
+        width: 220px;
+        height: 140px;
       }
     }
   }
   .roomBorder{
-    width: 22rem;
-    height:18.8rem;
+    width: 220px;
+    height:188px;
     border-radius: 10px;
     // opacity:0.4;
     border: 1px solid #F39800;
     float: left;
-    margin:3.2rem 2.4rem 0 0;
+    margin:32px 24px 0 0;
     background: rgba(3, 231, 231, 0.25);
     .priceBottom{
-      width: 17.6rem;
-      height:3.2rem;
+      width: 176px;
+      height:32px;
       background:rgba(3, 231, 231, 0.4);
       border-radius: 5px;
-      margin: .8rem 1.6rem;
-      line-height: 3.2rem;
+      margin: 8px 16px;
+      line-height: 32px;
       color: #F39800;
-      font-size:1.6rem;
-      padding:0 0.6rem;
+      font-size:16px;
+      padding:0 6px;
       span:nth-child(1){
         float: left;
       }

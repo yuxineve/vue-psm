@@ -51,40 +51,40 @@ export default {
 <style lang="less">
 #MakeCard {
   .leftTips{
-    margin-top: 15.6rem;
+    margin-top: 156px;
   }
   .cardTips{
     float:left;
-    width:24rem;
-    height: 34rem;
+    width:240px;
+    height: 340px;
     background:rgba(3, 231, 231, 0.4);
-    border-radius: 1.4rem;
-    margin: 13.8rem 0 0 16rem;
+    border-radius: 14px;
+    margin: 138px 0 0 160px;
     :nth-child(1){
       text-align: center;
       color: #F8F9FB;
-      font-size:2rem;
-      padding:1rem 0;
+      font-size:20px;
+      padding:10px 0;
     }
     .roomImg{
-      width:19rem;
-      height:21.8rem;
+      width:190px;
+      height:218px;
       background:url('~@/assets/images/1.jpg') center center no-repeat;
       background-size: cover;
-      border-radius:1rem;
-      margin:1rem 2.5rem;
+      border-radius:10px;
+      margin:10px 25px;
     }
     :last-child{
       text-align: center;
-      font-size:1.6rem;
+      font-size:16px;
       > span{
         display:inline-block;
-        width:15rem;
-        height:2rem;
+        width:150px;
+        height:20px;
         text-align: center;
-        border:.1rem solid #03D4E7;
-        border-radius: .7rem;
-        margin-top: .2rem;
+        border:1px solid #03D4E7;
+        border-radius: 7px;
+        margin-top: 2px;
       }
     }
   }

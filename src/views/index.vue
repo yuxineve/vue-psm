@@ -48,7 +48,7 @@ export default {
 #Index{
   .bottomBox{
     width: 100%;
-    height: 1.2rem;
+    height: 12px;
     background:#02C2C2;
   }
   color: #333;

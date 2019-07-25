@@ -75,18 +75,18 @@ export default {
 <style lang="less">
 @import "../assets/style/common.less";
 .login-button {
-  width: 35rem;
+  width: 350px;
   span {
     position: relative;
     i {
       display: inline-block;
       position: absolute;
       z-index: 2;
-      top: 0.1rem;
-      left: 0.8rem;
+      top: 1px;
+      left: 8px;
     }
     input {
-      padding: 0 3rem;
+      padding: 0 30px;
     }
   }
 }
@@ -96,15 +96,15 @@ export default {
   background-size: cover;
   height: 100%;
   button.loginIn {
-    width: 35rem;
+    width: 350px;
   }
 }
 .btnWrap {
   position: absolute;
-  top: calc(50% - 10.6rem);
-  left: calc(50% - 17.5rem);
+  top: calc(50% - 106px);
+  left: calc(50% - 175px);
   .login-button {
-    margin-bottom: 3rem;
+    margin-bottom: 30px;
   }
 }
 </style>

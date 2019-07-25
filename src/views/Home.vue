@@ -46,7 +46,7 @@ export default {
   z-index: 5;
   left: 50%;
   display: block;
-  font-size: 2.4rem;
+  font-size: 24px;
   animation: flash 3s ease;
 }
 @keyframes flash {

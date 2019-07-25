@@ -68,7 +68,7 @@ export default {
 <style lang="less">
 #PageIntro {
   .welcome{
-    font-size: 3.6rem;
+    font-size: 36px;
     color: #FDFDFD;
     width: 100%;
     float: left;
@@ -77,17 +77,17 @@ export default {
       background:url('~@/assets/images/border.png') center center no-repeat;
       background-size: cover;
       width: 100%;
-      height: 3.4rem;
-      margin-top: 1rem;
+      height: 34px;
+      margin-top: 10px;
     }
   }
   .welcome > div {
-    width: 43.2rem;
-    margin:7.6rem 0 0 33.8rem;
+    width: 432px;
+    margin:76px 0 0 338px;
   }
   .btnSquare{
     float: left;
-    margin: 4rem 0 0 -3.4rem;
+    margin: 40px 0 0 -34px;
     :nth-child(1) .mainBtn{
       background:url('~@/assets/images/order.png') center center no-repeat;
       background-size: cover;
@@ -101,30 +101,30 @@ export default {
       background-size: cover;
     }
     .mainBtn{
-      width:12rem;
-      height:20rem;
+      width:120px;
+      height:200px;
       text-align: center;
       // background:#F39800;
       float: left;
-      margin-left: 7.4rem;
+      margin-left: 74px;
     }
   }
   .BtnRound{
-    width: 33rem;
+    width: 330px;
     position:absolute;
-    right: 4rem;
-    bottom: 2.8rem;
+    right: 40px;
+    bottom: 28px;
     .subBtn{
-      border-radius: 4rem;
+      border-radius: 40px;
       text-align: center;
       float:left; 
       div{
-        width:9rem;
-        height:9rem;
+        width:90px;
+        height:90px;
       }
     }
     .subBtn:not(:first-of-type){
-      margin-left: 3rem;
+      margin-left: 30px;
     }
     :nth-child(1) div{
       background:url('~@/assets/images/continu.png') center center no-repeat;

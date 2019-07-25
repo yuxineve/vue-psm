@@ -70,7 +70,7 @@ export default {
 <style lang="less">
 .numKey{
   position: absolute;
-  width: 24rem;
+  width: 240px;
   .keyboard .line:nth-child(4) .key:nth-child(-n+3){
     display: none;
   }

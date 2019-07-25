@@ -68,12 +68,12 @@ body,
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
   color: #2c3e50;
-  font-size: 1.4rem;
+  font-size: 14px;
   height: 100%;
   position: relative;
 }
 #nav {
-  padding: 3rem;
+  padding: 30px;
   a {
     font-weight: bold;
     color: #2c3e50;

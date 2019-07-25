@@ -29,38 +29,38 @@ export default {
 
 #StepTips {
   position: absolute;
-  top: 1.4rem;
-  right: 2rem;
+  top: 14px;
+  right: 20px;
   .stepBorder{
-    width:15.6rem;
-    height: 4.2rem;
+    width:156px;
+    height: 42px;
     border:1px solid rgba(3,231,231,0.4);
     float: left;
-    border-radius: .8rem;
+    border-radius: 8px;
     color: #CCCCCA;
     .numBox{
-      width:5rem;
-      height:4.4rem;
-      border-radius: .8rem;
+      width:50px;
+      height:44px;
+      border-radius: 8px;
       background: rgba(3,231,231,0.4);
-      font-size: 2.4rem;
+      font-size: 24px;
       font-family: 'ALHY';
       text-align: center;
-      line-height: 4.4rem;
+      line-height: 44px;
       float: left;
-      margin-top: -0.1rem;
+      margin-top: -1px;
     }
     .textBox{
       float: right;
-      font-size: 2.2rem;
-      width: 10.6rem;
+      font-size: 22px;
+      width: 106px;
       height: 100%;
-      line-height: 4.4rem;
+      line-height: 44px;
       text-align: center;
     }
   }
   .stepBorder:not(:last-child){
-    margin-right: 1.2rem;
+    margin-right: 12px;
   }
 }
 </style>

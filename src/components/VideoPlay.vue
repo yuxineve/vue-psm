@@ -58,7 +58,7 @@ export default {
 
 <style lang="less">
 #videoPlay{
-  height:62.1rem;
+  height:621px;
   color: #333;
 }
 </style>
