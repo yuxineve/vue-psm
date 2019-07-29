@@ -10,10 +10,10 @@
     </div>
     <div class="boxFlex" :class="{opacityHidden:isOpacity}">
       <div class="title"><span>身份证扫描</span></div>
-      <div class="img" v-if="isIdentifyIDCard">
+      <div class="img" v-if="!isIdentifyIDCard">
         <img :src="IDCardImg"/>
       </div>
-      <div class="img" v-else>
+      <div class="img" v-if="isIdentifyIDCard">
         <div class="IDCardImged"><img :src="IDCardImged"/></div>
         <div class="IDCardDetail">
           <span>姓&#12288;名：{{name}}</span>
@@ -29,9 +29,11 @@
       <el-button type="success" v-if="!config.IsValid" @click="facedNext">录入人脸</el-button>
     </div>
     <div class="camera"  v-if="isOpacity && isIdentifyFace">
-      <div><span>请对准摄像头</span></div>
+      <div><span>{{cameraTips}}</span></div>
       <div class="faceRecognition">
-        <div></div>
+        <div>
+          <embed id="RoutonReader" type="application/mozilla-npruntime-scriptable-plugin" width="100%" height="100%" />
+        </div>
       </div>
       <el-button style="margin:10px 0 0 280px" type="success" v-if="!config.IsValid" @click="payNext">请支付</el-button>
     </div>
@@ -91,40 +93,50 @@ export default {
       IDCardImged:require("@/assets/images/1.jpg"),
       faceImg:require("@/assets/images/1.jpg"),
       orderImg:require("@/assets/images/1.jpg"),
-      isIdentifyIDCard:false,//IDCard是否识别完成
       isIdentifyFace:false,//人脸是否识别完成
-      name:'于小朵',
-      IDCard:'230524199807022520',
+      isIdentifyIDCard:false,//IDCard是否识别完成
+      name:'',
+      IDCard:'',
+      cameraTips:'请对准摄像头',
     }
   },
   created () {
-    this.name = common.sensitString(this.name,0,1,'*');
-    this.IDCard = common.sensitString(this.IDCard,4,4,'*');
+    cfg.peopleData = [];
     this.$store.commit("changeStatus", true);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
-    this.siteStepText.map((val,key) => {
-      if(key <= 2){
-        val.selectClass = true;
-      }else{
-        val.selectClass = false;
-      }
+    common.handleCard();
+    const len = cfg.peopleData.length;
+    if(len > 0){
+      cfg.peopleData.map((val,key,arr) => {
+        if(len == (key+1)){
+          this.name = common.sensitString(val.name,0,1,'*');
+          this.IDCard = common.sensitString(val.idCard,4,4,'*');
+          this.isIdentifyIDCard = true
+          if(config.IsValid){//有硬件时 录入人脸
+            this.facedNext();
+          }
+        }
+      })
+    };
+    this.siteStepText.map((val,key) => {//step
+      (key <= 2) ? val.selectClass = true : val.selectClass = false;
       return val;
-    })
+    });
   },
   methods: {
     facedNext(){
       this.isOpacity = true;
       this.isIdentifyFace = true;
+      const flag = cfg.FaceVideoComp();
+      if(flag){//人脸识别成功后 进行支付
+        this.payNext();
+      }
     },
     payNext(){
       this.isOpacity = true;
       this.isIdentifyFace = false;
       this.siteStepText.map((val,key) => {
-        if(key <= 3){
-          val.selectClass = true;
-        }else{
-          val.selectClass = false;
-        }
+        (key <= 3) ? val.selectClass = true : val.selectClass = false;
         return val;
       })
     }
@@ -236,6 +248,9 @@ export default {
         height:228px;
         background: #FFFFFF;
         border-radius:10px;
+        #Reader{
+          opacity:0;
+        }
       }
     }
   }
