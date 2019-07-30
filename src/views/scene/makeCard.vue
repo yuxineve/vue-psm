@@ -10,7 +10,7 @@
     </div>
     <div class="cardTips">
       <div><span>{{ cardTips }}</span></div>
-      <div class="roomImg"></div>
+      <div class="roomImg"><img :src=roomImgCard /></div>
       <div><span>房间号：{{ roomNum }}</span></div>
     </div>
   </div>
@@ -31,6 +31,7 @@ export default {
       siteStepText:this.$store.state.siteStepTextState,
       cardTips:'请取走房卡',//制卡失败
       roomNum:'8521',
+      roomImgCard:'',
     }
   },
   created () {
@@ -38,7 +39,8 @@ export default {
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {
       return val.selectClass = true;
-    })
+    });
+    this.roomImgCard = require("@/assets/images/makeCard.gif");
   },
   methods: {},
   computed: {},
@@ -69,10 +71,16 @@ export default {
     .roomImg{
       width:190px;
       height:218px;
-      background:url('~@/assets/images/1.jpg') center center no-repeat;
-      background-size: cover;
+      // background:url('~@/assets/images/1.jpg') center center no-repeat;
+      // background-size: cover;
       border-radius:10px;
       margin:10px 25px;
+      overflow: hidden;
+      > img{
+        width:100%;
+        height: 100%;
+        padding:0;
+      }
     }
     :last-child{
       text-align: center;

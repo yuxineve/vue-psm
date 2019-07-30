@@ -196,10 +196,17 @@ export default {
   .roomMsg{
     color: #F8F9FB;
     margin: 110px 0 0 60px;
+    .peopleoImg{
+      background:url('~@/assets/images/peopleNum.png') center center no-repeat;
+      background-size: cover;
+    }
+    .dayNumImg{
+      background:url('~@/assets/images/selectDay.png') center center no-repeat;
+      background-size: cover;
+    }
     .peopleoImg,.dayNumImg{
       width: 56px;
       height:56px;
-      background:#03C3C3;
       border-radius: 10px;
     }
     .selectPeople,.selectDate{

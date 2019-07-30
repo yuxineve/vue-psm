@@ -28,7 +28,7 @@
       </div>
       <el-button type="success" v-if="!config.IsValid" @click="facedNext">录入人脸</el-button>
     </div>
-    <div class="camera"  :class="{visibility:!(isOpacity && isIdentifyFace)}">  
+    <div class="camera"  :class="{animation:(isOpacity && isIdentifyFace),visibility:!(isOpacity && isIdentifyFace)}">  
       <div><span></span></div>
       <div class="faceRecognition">
         <div>
@@ -91,9 +91,9 @@ export default {
       config:cfg,
       isOpacity:false,//暗化人脸识别和身份证模块
       siteStepText:this.$store.state.siteStepTextState,
-      IDCardImg:require("@/assets/images/1.jpg"),
+      IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img
       IDCardImged:require("@/assets/images/1.jpg"),//身份证识别照片
-      faceImg:require("@/assets/images/1.jpg"),
+      faceImg:require("@/assets/images/face.gif"),//人脸待识别的img
       orderImg:require("@/assets/images/1.jpg"),
       isIdentifyFace:false,//人脸是否识别完成
       isIdentifyIDCard:false,//IDCard是否识别完成
@@ -223,7 +223,7 @@ export default {
 
 <style lang="less">
 #VerifyIdentidy {
-  @keyframes spillIn{ 
+  @keyframes fideOut{ 
     0%{
       opacity:0;
     }
@@ -240,7 +240,10 @@ export default {
     display: none;
   }
   .visibility{
-  	visibility: hidden;
+  	opacity: 0;
+  }
+  .animation{
+    animation:fideOut 0.5s ease-in-out backwards;
   }
   .boxFlex{
     width:220px;
