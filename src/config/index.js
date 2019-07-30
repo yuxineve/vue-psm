@@ -3,6 +3,8 @@ const cfg = {
   ISMOCK: true, //是否mock
   similar: 0.7,
   peopleData:[],//硬件读取身份的信息
+  initFace:'',//人脸初始化
+  
 };
 
 

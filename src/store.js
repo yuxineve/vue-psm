@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     changeDisclai(state,flag) {
       state.IsDisclaiDisplay = flag;
-    }
+    },
   },
   actions: {}
 });

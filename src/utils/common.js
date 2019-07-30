@@ -1,10 +1,9 @@
-// import Vue from "vue";
-// import { Message } from "element-ui";
+
 import cfg from "@/config/index.js"
-// Vue.use(Message);
 
 const getPeopleMsg = () => {
-  const embedObj = document.getElementById("RoutonReader");
+  var flag = false;
+  var embedObj = document.getElementById("RoutonReader");
   if (cfg.IsValid) {
     var currentCardNo = embedObj.CardNo();
     var NameL = embedObj.NameL();
@@ -22,21 +21,21 @@ const getPeopleMsg = () => {
     var Born = "19931214";
     var Address = "海口市美兰区人民东里61号";
   };
-  const infoflag = 0;
-  if (cfg.peopleData.length > 0){
-    peopleData.map(function (item) {//校验身份证是否已经办理
-      if (item.kw1 == currentCardNo) {
-          infoflag = 1;//此处提示身份信息重复录入
-          embedObj.FaceCloseVideo(); //关闭摄像头
-          FaceVideo = 1;
-          embedObj.FaceRelease(); //释放人脸库初始化    可在页面退出时调用
-          handleCard();
-          return;
-      }
-    })
-  };
+  var infoflag = 0;
+  // if (cfg.peopleData.length > 0){
+  //   peopleData.map(function (item) {//校验身份证是否已经办理
+  //     if (item.kw1 == currentCardNo) {
+  //         infoflag = 1;//此处提示身份信息重复录入
+  //         embedObj.FaceCloseVideo(); //关闭摄像头
+  //         FaceVideo = 1;
+  //         embedObj.FaceRelease(); //释放人脸库初始化    可在页面退出时调用
+  //         handleCard();
+  //         return;
+  //     }
+  //   })
+  // };
   if(infoflag == 0){
-    const cardArr = {
+    var cardArr = {
       name: NameL,
       idCard: currentCardNo,
       img: Image,
@@ -47,88 +46,51 @@ const getPeopleMsg = () => {
       public: "0", //公安网上传标识 （0-未退 1-已退）
       address: Address
     };
-    // document.all['idPhoto'].src = 'data:image/bmp;base64,' + Image;
+//  document.all['idPhoto'].src = 'data:image/bmp;base64,' + Image;
+    flag = "data:image/bmp;base64," + Image;
     cfg.peopleData.push(cardArr);
     if (cfg.IsValid) {
-      setTimeout(FaceOpenVideo(), 500);
+      setTimeout(faceOpenVideo(), 500);
     }
   }
+  return flag;
 };
 
-const FaceOpenVideo = () => {//关闭摄像头
-  const embedObj = document.getElementById("RoutonReader");
+const faceOpenVideo = () => {//打开摄像头
+  var embedObj = document.getElementById("RoutonReader");
   embedObj.FaceCloseVideo();
-  var ret = embedObj.FaceOpenVideo(0, 125, 125);
-  FaceVideo = ret;
-  embedObj.FaceRelease(); //先释放人脸库
-  embedObj.FaceInit();
-}
-
-/*重新录入人脸*/
-const hint = () => {
-  setTimeout(function() {
-    $(".li-thi p").html("请侧身正视摄像头");
-    FaceVideoComp();
-  }, 1500);
+  var ret = embedObj.FaceOpenVideo(0, 348, 228);//0--打开摄像头成功；其它--打开失败
+  if(ret == 0){
+  	embedObj.FaceRelease(); //先释放人脸库
+  	cfg.initFace = embedObj.FaceInit();//初始化,0：成功
+  }
 }
 
 /* 录入人脸 (人脸识别)*/
-const FaceVideoComp = () => {
-    let flag = false;
-    const embedObj = document.getElementById("RoutonReader");
-    var photoPath = "D:\\zjphoto\\photo.jpg"; //身份证照片路径
-    var valRet = embedObj.FaceVideoCompare(photoPath, "D:\\zjphoto\\face.jpg");
-    if(valRet > 0){//成功比对出分值
-      if(valRet < cfg.similar){
-        // $('.li-thi p').html('人脸匹配低于' + cfg.similar*100 + '%' + ' 请重新验证');
-        hint();	
-      }else{
-        // $('.li-thi .s-msg').show().html('相似对比度为：'+valRet.toFixed(2)*100+'%');
-        // $('.li-thi .idPhoto').show();
-        // $('#memberHandleReader,.li-thi .gif').hide();
-        // $('.li-thi p').html('人脸匹配成功');
-        const len = cfg.peopleData.length;
-        cfg.peopleData.map((val,key) => {
-          if (len == (key + 1)) {
-            val.faceImg = embedObj.GetBase64Img("D:\\zjphoto\\face.jpg"); //人脸图像64编码
-            val.faceSimilar =  valRet.toFixed(2);//人脸识别相似度
-          }
-        })
-        //将图片转成base64编码显示到页面
-        document.all['cameraPhoto'].src = 'data:image/bmp;base64,' + embedObj.GetBase64Img("D:\\zjphoto\\face.jpg");
-        embedObj.FaceCloseVideo();//关闭摄像头
-        FaceVideo = 1;
-        embedObj.FaceRelease();//释放人脸库初始化    可在页面退出时调用
-        // setTimeout('peopleHanlde_vm.nextStep()',1000);
-        return flag = true;
-      }   
-    }else if(valRet==-2){
-      // $('.li-thi p').html('未检测到人脸！');
-      hint();	
-    }else if(valRet==-3 || valRet==-4){
-      // $('.li-thi p').html('人脸位置不合格！');
-        hint()
-    }else if(valRet==-5){
-      // $('.li-thi p').html('人脸特征值提取失败！');
-        hint()
-    }else if(valRet==-6){
-      // $('.li-thi p').html('照片中人脸检测失败！');
-        hint()
-    };
+const faceVideoComp = (that) => {
+		if(cfg.initFace == 0){
+	    var embedObj = document.getElementById("RoutonReader");
+	    var photoPath = "D:\\zjphoto\\photo.jpg"; //身份证照片路径
+      var valRet = embedObj.FaceVideoCompare(photoPath, "D:\\zjphoto\\face.jpg");
+      return valRet;
+    }else{
+    	alert('人脸初始化失败！');
+    	faceVideoComp();
+			return;
+    }
 };
 
 /*识别身份证*/
-const handleCard = () => {
-  let flag = false;
-  const embedObj = document.getElementById("RoutonReader");
-  const isInit = false;
-  let rst = null; //读卡识别标志
+const handleCard = (leftTips) => {
+  var embedObj = document.getElementById("RoutonReader");
+  var isInit = false;
+  var rst = null; //读卡识别标志
   if (cfg.IsValid) {
     //读取身份证
     embedObj.setPortNum(0);
     if (false == isInit) {
       //设置端口号，1表示串口1，2表示串口2，依此类推；1001表示USB。0表示自动选择
-      const port = embedObj.setPortNum(0); //changed args
+      var port = embedObj.setPortNum(0); //changed args
       if (port == 0) {
         alert("端口初始化失败！");
         return;
@@ -142,17 +104,12 @@ const handleCard = () => {
     } else {
       embedObj.PhotoPath = "";
     }
+    rst = embedObj.ReadCard();//读卡
   } else {
     //假设身份证读取成功
     rst = 0x90;
   }
-  //获取信息
-  if (rst == 0x90) {
-    getPeopleMsg();
-  } else {
-    handleCard();
-  }
-  return flag = true;
+  return rst;
 };
 
 /* 敏感字符串替换
@@ -174,7 +131,8 @@ const common = {
   getPeopleMsg: getPeopleMsg,
   sensitString: sensitString,
   handleCard: handleCard,//身份证
-  FaceVideoComp: FaceVideoComp,//人脸
+  faceVideoComp: faceVideoComp,//人脸
+  faceOpenVideo:faceOpenVideo
 };
 
 export default common;
