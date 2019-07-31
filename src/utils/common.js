@@ -59,7 +59,7 @@ const getPeopleMsg = () => {
 const faceOpenVideo = () => {//打开摄像头
   var embedObj = document.getElementById("RoutonReader");
   embedObj.FaceCloseVideo();
-  var ret = embedObj.FaceOpenVideo(0, 348, 228);//0--打开摄像头成功；其它--打开失败
+  var ret = embedObj.FaceOpenVideo(0, 270, 370);//0--打开摄像头成功；其它--打开失败
   if(ret == 0){
   	embedObj.FaceRelease(); //先释放人脸库
   	cfg.initFace = embedObj.FaceInit();//初始化,0：成功

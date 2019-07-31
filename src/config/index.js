@@ -1,7 +1,7 @@
 const cfg = {
   IsValid: false, //是否含有硬件，需要人脸识别
   ISMOCK: true, //是否mock
-  similar: 0.7,
+  similar: 0.9,
   peopleData:[],//硬件读取身份的信息
   initFace:'',//人脸初始化
   

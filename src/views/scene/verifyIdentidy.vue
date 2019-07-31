@@ -23,13 +23,10 @@
     </div>
     <div class="boxFlex" :class="{opacityHidden:isOpacity}">
       <div class="title"><span>人脸识别</span></div>
-      <div class="img">
-        <img :src="faceImg"/>
-      </div>
+      <div class="img faceImgWaiting"></div>
       <el-button type="success" v-if="!config.IsValid" @click="facedNext">录入人脸</el-button>
     </div>
     <div class="camera"  :class="{animation:(isOpacity && isIdentifyFace),visibility:!(isOpacity && isIdentifyFace)}">  
-      <div><span></span></div>
       <div class="faceRecognition">
         <div>
           <img :src="faceImg" :class="{display:displayFaceImg}"/>
@@ -65,7 +62,7 @@
         <div class="cameraPosition">
           <div class="title"><span>摄像头位置</span></div>
           <div class="img">
-            <img :src="faceImg"/>
+            <img src="../../assets/images/1.jpg"/>
           </div>
         </div>
       </span>
@@ -93,7 +90,7 @@ export default {
       siteStepText:this.$store.state.siteStepTextState,
       IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img
       IDCardImged:require("@/assets/images/1.jpg"),//身份证识别照片
-      faceImg:require("@/assets/images/face.gif"),//人脸待识别的img
+      faceImg:'',//人脸待识别的img
       orderImg:require("@/assets/images/1.jpg"),
       isIdentifyFace:false,//人脸是否识别完成
       isIdentifyIDCard:false,//IDCard是否识别完成
@@ -140,11 +137,6 @@ export default {
       this.isOpacity = true;
       this.isIdentifyFace = true;
       let flag = this.compareNum();
-      if(flag){
-      	setTimeout(function(){//人脸识别成功后 进行支付
-		        that.payNext();
-	      },2000)
-      }
     },
     payNext(){//绑定支付，扫二维码
       this.isOpacity = true;
@@ -155,9 +147,9 @@ export default {
       })
     },
     getDistingMark(){//读卡识别返回信息
-      let flag = '';
-      flag = common.handleCard();
-      if(flag == 0x90){
+      let rst = '';
+      rst = common.handleCard();
+      if(rst == 0x90){
         this.leftTips = "身份扫描成功，请继续识别人脸！";
         this.IDCardImged =  common.getPeopleMsg();
       }else if(rst==0x02){
@@ -169,18 +161,23 @@ export default {
       }
     },
     compareNum(){//对人脸识别后的返回值，进行比较
-      let compareFlag = false;
+    	var embedObj = document.getElementById("RoutonReader");
+      const that = this;
       const returnData = common.faceVideoComp();
+      console.log(returnData);
       if(returnData > 0){//成功比对出分值
         if(returnData < cfg.similar){
           this.leftTips = '人脸匹配低于' + cfg.similar*100 + '%' + ' 请重新验证';
+          setTimeout(function() {
+	          that.compareNum();
+	        }, 1500);
         }else{
-          this.leftTips = '相似对比度为：'+valRet.toFixed(2)*100+'%,请支付绑定该订单！';
+          this.leftTips = '相似对比度为：'+returnData.toFixed(2)*100+'%,请支付绑定该订单！';
           var len = cfg.peopleData.length;
 	        cfg.peopleData.map((val,key) => {
 	          if (len == (key + 1)) {
 	            val.faceImg = embedObj.GetBase64Img("D:\\zjphoto\\face.jpg"); //人脸图像64编码
-	            val.faceSimilar =  valRet.toFixed(2);//人脸识别相似度
+	            val.faceSimilar =  returnData.toFixed(2);//人脸识别相似度
 	          }
           });
           //将图片转成base64编码显示到页面
@@ -188,30 +185,32 @@ export default {
           this.displayFaceImg = false;
           embedObj.FaceCloseVideo();//关闭摄像头
           embedObj.FaceRelease();//释放人脸库初始化,可在页面退出时调用
-          compareFlag = true;
+          setTimeout(function(){//人脸识别成功后 进行支付
+			        that.payNext();
+		      },2000);
+		      return;
         }
       }else if(returnData == -2){
         this.leftTips = '未检测到人脸！';
         setTimeout(function() {
-          this.compareNum();
+          that.compareNum();
         }, 1500);
       }else if(returnData == -3 || returnData == -4){
         this.leftTips = '人脸位置不合格！';
         setTimeout(function() {
-          this.compareNum();
+          that.compareNum();
         }, 1500);
       }else if(returnData == -5){
         this.leftTips = '人脸特征值提取失败！';
         setTimeout(function() {
-          this.compareNum();
+          that.compareNum();
         }, 1500);
       }else if(returnData == -6){
         this.leftTips = '照片中人脸检测失败！';
         setTimeout(function() {
-          this.compareNum();
+          that.compareNum();
         }, 1500);
       };
-      return compareFlag;
     },
   },
   computed: {},
@@ -240,6 +239,7 @@ export default {
     display: none;
   }
   .visibility{
+  	visibility: hidden;
   	opacity: 0;
   }
   .animation{
@@ -254,6 +254,10 @@ export default {
   .boxFlex{
     float:left;
     margin-left:40px;
+    .faceImgWaiting{
+    	background: url('~@/assets/images/face.gif');
+    	background-size: cover;
+    }
     > .el-button--success{
       margin-top:40px;
     }
@@ -316,28 +320,22 @@ export default {
     margin-top: 158px;
   }
   .camera{
-    width:520px;
-    height:352px;
+		width: 500px;
+    height: 440px;
     position: absolute;
-    top: 132px;
-    left: calc(50% - 260px);
-    :first-child{
-      width:100%;
-      text-align: center;
-      color: #FBFEFE;
-      font-size: 20px;
-    }
+    top: 88px;
+    left: calc(50% - 250px);
     .faceRecognition{
-      width:348px;
-      height:228px;
-      margin:20px 70px;
+      width:270px;
+      height:370px;
+      margin:20px 104px;
       background:rgba(255,255,255,0.25);
       opacity: 1;
       border-radius: 10px;
       padding:15px;
       > div{
-        width:348px;
-        height:228px;
+        width:270px;
+      	height:370px;
         background: #FFFFFF;
         border-radius:10px;
         position: relative;
