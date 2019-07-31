@@ -90,7 +90,7 @@ export default {
       siteStepText:this.$store.state.siteStepTextState,
       IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img
       IDCardImged:require("@/assets/images/1.jpg"),//身份证识别照片
-      faceImg:'',//人脸待识别的img
+      faceImg:'',//人脸识别后生成的img
       orderImg:require("@/assets/images/1.jpg"),
       isIdentifyFace:false,//人脸是否识别完成
       isIdentifyIDCard:false,//IDCard是否识别完成
