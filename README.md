@@ -1,4 +1,4 @@
-# tuyi-page
+# vue-psm
 
 ## Project setup
 ```
