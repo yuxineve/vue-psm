@@ -14,7 +14,7 @@
         <img :src="IDCardImg"/>
       </div>
       <div class="img" v-if="isIdentifyIDCard">
-        <div class="IDCardImged"><img :src="IDCardImged"/></div>
+        <div class="IDCardImged"><img src="../../assets/images/idPhoto.png" /></div>
         <div class="IDCardDetail">
           <span>姓&#12288;名：{{name}}</span>
           <span>身份证：{{IDCard}}</span>
@@ -62,7 +62,7 @@
         <div class="cameraPosition">
           <div class="title"><span>摄像头位置</span></div>
           <div class="img">
-            <img src="../../assets/images/1.jpg"/>
+            <img src="../../assets/images/goProSite.gif"/>
           </div>
         </div>
       </span>
@@ -89,7 +89,7 @@ export default {
       isOpacity:false,//暗化人脸识别和身份证模块
       siteStepText:this.$store.state.siteStepTextState,
       IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img
-      IDCardImged:require("@/assets/images/1.jpg"),//身份证识别照片
+      IDCardImged:require("@/assets/images/1.jpg"),//身份证识别的照片 
       faceImg:'',//人脸识别后生成的img
       orderImg:require("@/assets/images/1.jpg"),
       isIdentifyFace:false,//人脸是否识别完成

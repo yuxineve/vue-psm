@@ -8,6 +8,7 @@ export default new Vuex.Store({
     count: 120,
     seenGoBack: true,
     seenHome: false,
+    timeOutSrc:'',
     IsDisclaiDisplay: true,//展示免责
     siteStepTextState: [
       //现场入住step
@@ -41,6 +42,11 @@ export default new Vuex.Store({
   mutations: {
     decrease(state) {
       state.count--;
+      if(state.count == 20){
+          state.timeOutSrc = require("@/assets/images/timeOut.gif");
+      }else if(state.count > 20){
+        state.timeOutSrc = '';
+      }
     },
     init(state, n) {
       state.count = n;

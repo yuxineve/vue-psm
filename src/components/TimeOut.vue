@@ -1,7 +1,13 @@
 
 <template>
-  <div id="TimeOut">
-    <div v-if="count < 30 ">{{ count }}</div>
+  <div id="TimeOut"  :class="{timeOutDisplay:count < 20}">
+    <div>
+      <img :src="timeOutSrc">
+      <span>
+        <label>返回首页</label>
+        <label> {{ count }}S </label>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -19,6 +25,9 @@ export default {
     count() {
       // console.log(this.$store.state.count);
       return this.$store.state.count;
+    },
+    timeOutSrc(){
+      return this.$store.state.timeOutSrc;
     }
   },
   watch: {},
@@ -29,15 +38,44 @@ export default {
 
 <style lang="less">
 #TimeOut {
-    color: #333;
     position: absolute;
-    top: 26%;
-    width: 100px;
-    height: 100px;
-    background: pink;
+    top: 621px;
+    width: 100%;
+    height: 646px;
+    background: rgba(0,0,0,0.6);
     text-align: center;
-    div{
-        color: #fff;
+    z-index: 999999;
+    display:none;
+    > div{
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      position: absolute;
+      top: calc(50% - 100px);
+      left: calc(50% - 100px);
+      > img{
+        width:100%;
+        height: 100%;
+      }
+      > span{
+        position: absolute;
+        color: #f0ae6d;
+        width: 120px;
+        top: calc(50% - 46px);
+        left: calc(50% - 60px);
+        height: 84px;
+        text-align: center;
+        > label{
+          display: block;
+          font-size:30px;
+        }
+        > label:first-child{
+          margin-bottom:8px;
+        }
+      }
     } 
+}
+.timeOutDisplay{
+  display:block!important;
 }
 </style>

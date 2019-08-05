@@ -13,6 +13,10 @@
       <div class="roomImg"><img :src=roomImgCard /></div>
       <div><span>房间号：{{ roomNum }}</span></div>
     </div>
+    <div class="adjust" style="float:left;margin:138px 0 0 160px">
+      <el-button type="success" plain @click="cardDefeated">制卡失败</el-button>
+      <el-button type="success" plain @click="cardSuccess">制卡成功</el-button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +33,7 @@ export default {
   data () {
     return {
       siteStepText:this.$store.state.siteStepTextState,
-      cardTips:'请取走房卡',//制卡失败
+      cardTips:'制卡中',//制卡失败,制卡中,请取走房卡
       roomNum:'8521',
       roomImgCard:'',
     }
@@ -40,9 +44,18 @@ export default {
     this.siteStepText.map((val,key) => {
       return val.selectClass = true;
     });
-    this.roomImgCard = require("@/assets/images/makeCard.gif");
+    this.roomImgCard = require("@/assets/images/cardMaking.gif");
   },
-  methods: {},
+  methods: {
+    cardDefeated(){
+      this.cardTips = '制卡失败';
+      this.roomImgCard = require("@/assets/images/cardDefeated.png");
+    },
+    cardSuccess(){
+      this.cardTips = '请取走房卡';
+      this.roomImgCard = require("@/assets/images/cardSuccess.png");
+    }
+  },
   computed: {},
   watch: {},
   props: [ ],

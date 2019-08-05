@@ -46,7 +46,6 @@ const getPeopleMsg = () => {
       public: "0", //公安网上传标识 （0-未退 1-已退）
       address: Address
     };
-//  document.all['idPhoto'].src = 'data:image/bmp;base64,' + Image;
     flag = "data:image/bmp;base64," + Image;
     cfg.peopleData.push(cardArr);
     if (cfg.IsValid) {

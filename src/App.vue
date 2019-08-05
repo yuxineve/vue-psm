@@ -33,7 +33,7 @@ export default {
         clearInterval(that.timeOutIndex);
         that.timeOutIndex = setInterval(function() {
           that.$store.commit("decrease"); //每秒状态值减一
-          //console.log(that.$store.state.count);
+          console.log(that.$store.state.count);
           if (that.$store.state.count < 0) {
             that.$router.push({ path: "/home" });
             clearInterval(that.timeOutIndex);
