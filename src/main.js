@@ -2,8 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueAxios from "./utils/api.js";
+import ServeApi from "@/utils/serveApi.js";
 
+Vue.prototype.VueAxios = VueAxios
+Vue.prototype.ServeApi = ServeApi
 Vue.config.productionTip = false
+
 
 new Vue({
   router,

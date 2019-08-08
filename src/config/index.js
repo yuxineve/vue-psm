@@ -4,7 +4,8 @@ const cfg = {
   similar: 0.9,
   peopleData:[],//硬件读取身份的信息
   initFace:'',//人脸初始化
-  
+  IsSerialPort : "COM1",//通信湍口号，酒店环境填COM2,公司环境填COM1
+  isWriteCard:true,
 };
 
 

@@ -5,12 +5,12 @@ function resolve(dir) {
 module.exports = {
     publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
     devServer: {
-        port: 8888, // 端口号
+        port: 9000, // 端口号
         host: "localhost",
         https: false, // https:{type:Boolean}
         proxy:{
             '/api':{
-                target:'http://test.tutrav.cn',
+                target:'http://pms.tutrav.cn',
                 changeOrigin:true,
                 ws:true,
                 pathRewrite: {

@@ -65,6 +65,10 @@ export default {
   },
   methods: {
     agreet(){
+      this.VueAxios(this.ServeApi.testApi,{type:1})
+      .then(res => {
+        console.log(res)
+      })
       this.$store.commit("changeDisclai", false);//隐藏免责
       this.$store.commit("changeStatus", false);//展示上一步
     },

@@ -25,8 +25,6 @@
 <script>
 import Vue from "vue";
 import { Button, Input, Icon } from "element-ui";
-import axios from "@/utils/api.js";
-//import common from '@/utils/common.js'
 
 Vue.use(Button);
 Vue.use(Input);
@@ -45,24 +43,15 @@ export default {
   methods: {
     loginIn: function() {
       var that = this;
-      const options = {
-        method: "post",
-        url: "/api/auth?type=mpApp_register",
-        arrayFormat: ""
-      };
       const params = {
-        userName: this.username,
-        mp_code: this.password,
-        state: 1213234321
+        username: 'ceshi01',//this.username,
+        password: '123456',//this.password,
       };
-      axios(options, params)
-        .then(data => {
-          console.log(data);
+      this.VueAxios(this.ServeApi.login, params)
+        .then(res => {
+          sessionStorage.setItem("token", res.data);
           that.$router.push("/home");
         })
-        .catch(e => {
-          console.log(e);
-        });
     }
   },
   computed: {},

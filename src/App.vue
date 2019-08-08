@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <embed id="writeCard" type="application/demo-plugin" width="1" height="1" />
     <router-view></router-view>
     <router-view name="timeOut"></router-view>
   </div>
@@ -35,6 +36,7 @@ export default {
           that.$store.commit("decrease"); //每秒状态值减一
           // console.log(that.$store.state.count);
           if (that.$store.state.count < 0) {
+            that.$store.commit("changeDisclai", true);//显示免责
             that.$router.push({ path: "/home" });
             clearInterval(that.timeOutIndex);
           }
@@ -71,6 +73,9 @@ body,
   font-size: 14px;
   height: 100%;
   position: relative;
+  #writeCard{
+    position:absolute;
+  }
 }
 #nav {
   padding: 30px;

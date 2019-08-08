@@ -37,13 +37,13 @@
     </div>
     <div v-if="isOpacity && !isIdentifyFace" class="weChatPay">
       <div>
-        <div><span>请使用微信扫描支付</span></div>
+        <div><span>请使用微信扫码绑定</span></div>
         <div class="wePayBorder">
           <img src="../../assets/images/wechat.png"/>
         </div>
       </div>
       <router-link :to="{name : 'MakeCard'}">
-        <el-button type="warning">完成支付</el-button>
+        <el-button type="warning">完成绑定</el-button>
       </router-link>
     </div>
     <div class="boxFlex" style="background:rgba(3, 231, 231, 0.4)">
