@@ -44,8 +44,8 @@ export default {
     loginIn: function() {
       var that = this;
       const params = {
-        username: 'ceshi01',//this.username,
-        password: '123456',//this.password,
+        username: this.username,
+        password: this.password,
       };
       this.VueAxios(this.ServeApi.login, params)
         .then(res => {

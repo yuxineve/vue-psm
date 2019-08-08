@@ -7,8 +7,8 @@ import { Message } from "element-ui";
 let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 let cancel = "";
 let requestConfig = {
-  production: "http://www.tutrav.cn",
-  development: "http://pms.tutrav.cn", //"http://192.168.0.172:9000", //
+  production: "http://pms.tutrav.cn",
+  development: "http://pms.tutrav.cn",
   timeout: 3000
 };
 let removePending = ever => {
@@ -24,7 +24,6 @@ let removePending = ever => {
 
 axios.defaults.baseURL = requestConfig[process.env.NODE_ENV];
 
-// 请求拦截器
 axios.interceptors.request.use(
   config => {
     // 每次请求之前拦截加上token
@@ -46,7 +45,6 @@ axios.interceptors.request.use(
   }
 );
 
-// 添加响应拦截器
 axios.interceptors.response.use(
   response => {
     removePending(response.config); //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
