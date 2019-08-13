@@ -35,7 +35,7 @@ export default {
         that.timeOutIndex = setInterval(function() {
           that.$store.commit("decrease"); //每秒状态值减一
           // console.log(that.$store.state.count);
-          if (that.$store.state.count < 0) {
+          if (that.$store.state.count <= 0) {
             that.$store.commit("changeDisclai", true);//显示免责
             that.$router.push({ path: "/home" });
             clearInterval(that.timeOutIndex);
