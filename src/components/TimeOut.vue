@@ -1,6 +1,6 @@
 
 <template>
-  <div id="TimeOut"  :class="{timeOutDisplay:count < 20}">
+  <div id="TimeOut"  :class="{timeOutDisplay:count < 21}">
     <div>
       <img :src="timeOutSrc">
       <span>

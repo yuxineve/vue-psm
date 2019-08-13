@@ -71,6 +71,12 @@ export default {
       })
       this.$store.commit("changeDisclai", false);//隐藏免责
       this.$store.commit("changeStatus", false);//展示上一步
+      const keyboardObj = document.getElementById("keyboard");
+      if(keyboardObj != null){
+        document.addEventListener('click',function (e) {
+            keyboardObj.style.display = "block";
+        })
+      }
     },
     disAgreet(){
       this.$router.push('/index');
@@ -87,7 +93,7 @@ export default {
 
 #Content {
   color: #F9FCFC;
-  z-index: 1;
+  z-index: 9;
   padding:0 190px;
   .contentBox{
     height:560px;

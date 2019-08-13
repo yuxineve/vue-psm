@@ -67,6 +67,9 @@ export default {
 
 <style lang="less">
 #PageIntro {
+  .leftTips{
+    margin-top: 0;
+  }
   .welcome{
     font-size: 36px;
     color: #FDFDFD;

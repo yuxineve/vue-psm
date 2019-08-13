@@ -40,6 +40,21 @@ export default new Router({
           component: () => import("@/views/order/orderRoom")
         },
         {
+          path: "verifyIdentity",
+          name: "VerifyIdentity",
+          component: () => import("@/views/order/verifyIdentity")
+        },
+        {
+          path: "roomType",
+          name: "RoomType",
+          component: () => import("@/views/order/roomType")
+        },
+        {
+          path: "apartment",
+          name: "Apartment",
+          component: () => import("@/views/order/apartment")
+        },
+        {
           path: "sceneRoom",
           name: "SceneRoom",
           component: () => import("@/views/scene/sceneRoom")

@@ -2,19 +2,19 @@
 <template>
   <div id="Keyboard" class="vitualKeyboard">
     <div class="search">
-      <input  name="inputArea" id="inputArea" autofocus="autofocus" :placeholder="placeholder" v-model="value"/>
-      <el-button type="primary" icon="el-icon-search" @click="searchAseetesProd">查询</el-button>
+      <span>
+        <input  name="inputArea" id="inputArea" autofocus="autofocus" :placeholder="placeholder" v-model="value"/>
+      </span>
+      <button @click="searchAseetesProd">查询</button>
       <!-- <input type="button" /> -->
     </div>
-    <div class="keyboardBox" id="keyboard" style='display: block;'>
+    <div class="keyboardBox" id="keyboard">
         <p class="showInput"></p>
-        <hr>
+        <!-- <hr> -->
         <div class="chinesePrompt">
             <div class="arrow">
               <i class="el-icon-caret-top up"></i>
               <i class="el-icon-caret-bottom down"></i>
-                <!-- <i class="up" ></i>
-                <i class="down"></i> -->
             </div>
             <div class="chinesePrompt-box">
                <div>
@@ -265,7 +265,7 @@ export default {
       path.onclick = function(e) {
         var strArr = _getInputContent().split("");
         strArr.push(e.target.innerText.slice(-1));
-        console.log(strArr.join(""))
+        // console.log(strArr.join(""))
         cStr = "";
         _inputNewContent(strArr.join(""));
         dataInit();
@@ -370,7 +370,7 @@ export default {
   computed: {},
   watch: {
     value(n){
-        console.log(n)
+        // console.log(n)
     },
   },
   mounted() {
@@ -385,36 +385,60 @@ export default {
 
 <style lang="less">
 .search{
-  width: 30rem;
-  height: 4.8rem;
-  position: absolute;
-  left: calc(50% - 15rem);
-  top: 2.2rem;
-}
-#inputArea {
-  width: 100%;
-  height: 100%;
-  border-radius: 0.4rem;
-  font-size: 1.4rem;
-  background-color: rgb(247, 247, 247);
-  font-family: "STHeitiSC";
-  text-indent: 1.6rem;
-  padding-right: 6.4rem;
-  box-sizing: border-box;
+  input::-webkit-input-placeholder{
+      color:#FAFCFC;
+  }
+  input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+      color:#FAFCFC;
+  }
+  input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+      color:#FAFCFC;
+  }
+  input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+      color:#FAFCFC;
+  }
+  > span{ 
+    float: left;
+    width: 335px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  #inputArea{
+    background:none;
+    border: 1px solid #02FBE7;
+    border-radius: 10px;
+    color:#FAFCFC;
+    font-size:18px;
+    width: 335px;
+    height: 50px;
+    float: left;
+    text-indent: 16px;
+    box-sizing: border-box;
+  }
 }
 .search button{
-  right: 0;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  z-index: 2;
+  float:left;
+  height: 45px;
+  background:#F39800;
+  color: #012625;
+  font-size: 18px;
+  padding: 10px 8px;
+  border:none;
+  width: 64px;
+  border-radius: 10px;
+  margin: 3px 20px;
+  text-align:center;
 }
 .chinesePrompt {
-  width: 68rem;
-  height: 3.6rem;
+  width: 644px;
+  height: 36px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
+  float: left;
+  line-height: 28px;
+  margin-bottom: 6px;
 }
 .arrow {
   position: absolute;
@@ -423,18 +447,18 @@ export default {
 }
 .arrow i {
   display: block;
-  width: 1.5rem;
-  height: 1rem;
+  width: 15px;
+  height: 10px;
 }
 .up {
   //background: url('arrow_up') no-repeat;
-  background-size: 1.5rem 1rem;
-  margin-top: 0.5rem;
+  background-size: 15px 10px;
+  margin-top: 5px;
 }
 .down {
  // background: url("img_arrow_down.png") no-repeat;
-  background-size: 1.5rem 1rem;
-  margin-top: 1rem;
+  background-size: 15px 10px;
+  margin-top: 10px;
 }
 .chinesePrompt .chinesePrompt-box {
   font-size: 0;
@@ -443,115 +467,121 @@ export default {
   box-sizing: border-box;
 }
 .span {
-    font-size: 1.6rem;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     display: inline-block;
-    line-height: 4rem;
+    line-height: 40px;
     cursor: pointer;
-    width: 10rem;
-    height: 4rem;
+    width: 100px;
+    height: 40px;
     text-align: center;
+    position: relative;
+    z-index: 5;
 }
 .keyboardBox {
   position: absolute;
-  width: 70.8rem;
-  height: 31rem;
+  width: 708px;
+  height: 242px;
   margin: 0;
-  right: calc(50% - 35rem);
-  top: 8rem;
-  padding: 1rem;
-  z-index: 2018;
-  background: #4277d8;
-  font-size: 1.6rem;
+  right: calc(50% - 432px);
+  top: 280px;
+  padding: 10px;
+  background: #F39800;
+  font-size: 16px;
+  border-radius: 12px;
+  display:none;
 }
 .line {
   position: relative;
-  height: 5rem;
-  line-height: 5rem;
+  height: 50px;
+  line-height: 50px;
 }
 .showInput {
   margin: 0;
-  padding: 0 2rem;
+  padding: 0 0 0 10px;
   color: #333333;
-  line-height: 2.5rem;
-  height: 2.5rem;
-  width: 50rem;
+  line-height: 36px;
+  height: 36px;
+  width: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  float: left;
 }
 .keys,.keysCmd,.keys_d {
   box-sizing: border-box;
   float: left;
-  width: 4.5rem;
+  width: 45px;
   color: #5a5a5a;
-  height: 4.5rem;
-  line-height: 4.5rem;
-  margin: 0 0 0.3rem .3rem;
-  border-radius: 0.4rem;
+  height: 45px;
+  line-height: 45px;
+  margin: 0 0 3px 3px;
+  border-radius: 4px;
   border: 1px solid #fff;
   text-align: center;
   cursor: pointer;
   background:  #fff;
+  position: relative;
+  z-index: 1;
 }
 .keys:hover,.keysCmd:hover,.keys_d:hover {
-  box-shadow: 0rem 0rem 0.3rem #a2deda inset;
+  box-shadow: 0 0 3px #a2deda inset;
   opacity: 0.7;
 }
 .chinesePrompt-box{
   top: 0px;
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 18px;
 }
 .active {
   background-color: #2f3c3b;
   background: #767676;
   color:#fff;
-  box-shadow: 0rem 0rem .3rem #333 inset;
+  box-shadow: 0 0 3px #333 inset;
 }
 .keys_d {
-  height: 4.5rem;
-  line-height: 2rem;
+  height: 45px;
+  line-height: 20px;
 }
 .key_enter {
-  width: 10.2rem;
+  width: 102px;
 }
 .k-w-50 {
-  width: 5rem;
+  width: 50px;
 }
 .k-w-70 {
-  width: 7rem;
+  width: 70px;
 }
 .k-w-75 {
-  width: 7.5rem;
+  width: 75px;
 }
 .k-w-80 {
-  width: 8rem;
+  width: 80px;
 }
 .k-w-100 {
-  width: 10rem;
+  width: 100px;
 }
 .k-w-120 {
-  width: 12rem;
+  width: 120px;
 }
 .k-w-704 {
-  width: 70.4rem;
+  width: 704px;
 }
 .gap {
-  margin-left: 3rem;
+  margin-left: 30px;
 }
 .gap_t {
-  margin-top: 1rem;
+  margin-top: 10px;
 }
 .line .l-h-40 {
-  line-height: 4rem;
+  line-height: 40px;
 }
 .f-s-14 {
-  font-size: 1.4rem;
+  font-size: 14px;
 }
 .t-a-l {
-  padding-left: 1.5rem;
+  padding-left: 15px;
   text-align: left;
 }
 </style>

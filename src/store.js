@@ -10,6 +10,23 @@ export default new Vuex.Store({
     seenHome: false,
     timeOutSrc:'',
     IsDisclaiDisplay: true,//展示免责
+    orderStepTextState:[{//订单取房
+      text:'查询订单',
+      num:'01',
+      selectClass:true,
+    },{
+      text:'验证身份',
+      num:'02',
+      selectClass:false,
+    },{
+      text:'支付费用',
+      num:'03',
+      selectClass:false,
+    },{
+      text:'制作房卡',
+      num:'04',
+      selectClass:false,
+    }],
     siteStepTextState: [
       //现场入住step
       {
