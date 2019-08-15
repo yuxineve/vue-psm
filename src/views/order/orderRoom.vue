@@ -5,7 +5,7 @@
     <StepTips :siteStepText="siteStepText"></StepTips>
     <div class="leftTips">
       <div class="tipsBox">
-        <span></span>
+        <span>{{leftTips}}</span>
       </div>
       <div class="tipsIcon"></div>
     </div>
@@ -27,6 +27,7 @@
           <p>请扫描身份证</p>
           <img src="../../assets/images/idCard.gif" >
         </div>
+        <el-button v-if="!config.IsValid" type="success" @click="handleCard">下一步</el-button>
       </div>
     </div>
   </div>
@@ -38,6 +39,8 @@ import StepTips from "@/components/StepTips"
 import DisclaimerContent from "@/components/Content"
 import Keyborad from '@/components/vitualKeyboard/Keyboard'
 import { Button } from "element-ui"
+import cfg from "@/config/index.js"
+import common from "@/utils/common.js"
 import '@/assets/style/common.less';
 
 Vue.use(Button);
@@ -46,6 +49,8 @@ export default {
   name: 'OrderRoom',
   data () {
     return {
+      config:cfg,
+      leftTips:'',
       siteStepText:this.$store.state.orderStepTextState,
       placeholder:'请填写预订时预留的姓名',
       isSelectBg:true,//true显示姓名查询，false显示身份证查询，
@@ -55,25 +60,46 @@ export default {
     this.$store.commit("changeStatus", false);//隐藏上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {
-      if(key <= 0){
-        val.selectClass = true;
-      }else{
-        val.selectClass = false;
-      }
+      (key <= 0) ? val.selectClass = true : val.selectClass = false;
       return val;
-    })
+    });
+    cfg.peopleData.length = 0;
   },
   methods: {
     getSearchValue(val){
       console.log(val);
+      cfg.chooseMyself = false;
       this.$router.push('roomType');
     },
     searchByName(){
       this.isSelectBg = true;
+      cfg.peopleData.length = 0;
     },
     searchByID(){
+      const that = this;
       this.isSelectBg = false;
-    }
+      cfg.peopleData.length = 0;
+      that.getDistingMark();
+    }, 
+    handleCard(){//身份证查询
+      cfg.chooseMyself = true;
+      this.$router.push('roomType');
+    }, 
+    getDistingMark(){//读卡识别返回信息
+      let rst = '';
+      rst = common.handleCard();
+      if(rst == 0x90){
+        this.leftTips = "身份扫描成功，已查询到订单！";
+        common.getPeopleMsg();
+        console.log(cfg.peopleData);
+      }else if(rst==0x02){
+        this.leftTips = "请重新将卡片放到读卡器上！";
+        this.getDistingMark();
+      }else if(rst==0x41){
+   			this.leftTips = "读取数据失败！";
+        this.getDistingMark();
+      }
+    },
   },
   computed: {},
   watch: {},

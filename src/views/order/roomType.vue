@@ -120,11 +120,7 @@ export default {
     this.$store.commit("changeStatus", true);//显示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {
-      if(key <= 0){
-        val.selectClass = true;
-      }else{
-        val.selectClass = false;
-      }
+      (key <= 0) ? val.selectClass = true : val.selectClass = false;
       return val;
     });
     for(let i=0;i<that.roomType.length;i++){

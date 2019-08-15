@@ -6,6 +6,7 @@ const cfg = {
   initFace:'',//人脸初始化
   IsSerialPort : "COM1",//通信湍口号，酒店环境填COM2,公司环境填COM1
   isWriteCard:true,
+  chooseMyself:'false',//是否是身份证扫描
 };
 
 

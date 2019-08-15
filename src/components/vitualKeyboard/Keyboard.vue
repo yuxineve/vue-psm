@@ -13,8 +13,10 @@
         <!-- <hr> -->
         <div class="chinesePrompt">
             <div class="arrow">
-              <i class="el-icon-caret-top up"></i>
-              <i class="el-icon-caret-bottom down"></i>
+              <i class="el-icon-caret-right down"></i>
+            </div>
+            <div class="arrow" style="left:0">
+              <i class="el-icon-caret-left up"></i>
             </div>
             <div class="chinesePrompt-box">
                <div>
@@ -138,8 +140,8 @@ export default {
       };
       arrowDown.onclick = function(e) {
         e.stopPropagation();
-        console.log(top)
-        console.log(height)
+        // console.log(top)
+        // console.log(height)
         if (Math.abs(top) >= height - 40) {
           return false;
         } else {
@@ -444,21 +446,9 @@ export default {
   position: absolute;
   right: 0;
   z-index: 2999;
-}
-.arrow i {
-  display: block;
-  width: 15px;
-  height: 10px;
-}
-.up {
-  //background: url('arrow_up') no-repeat;
-  background-size: 15px 10px;
-  margin-top: 5px;
-}
-.down {
- // background: url("img_arrow_down.png") no-repeat;
-  background-size: 15px 10px;
-  margin-top: 10px;
+  font-size:20px;
+  width:20px;
+  margin-top: 6px;
 }
 .chinesePrompt .chinesePrompt-box {
   font-size: 0;
@@ -533,6 +523,8 @@ export default {
   top: 0px;
   color: #fff;
   font-size: 18px;
+  width: 610px;
+  margin-left: 18px;
 }
 .active {
   background-color: #2f3c3b;
