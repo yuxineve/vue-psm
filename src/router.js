@@ -80,6 +80,26 @@ export default new Router({
           component: () => import("@/views/group/groupRoom")
         },
         {
+          path: "verifyIdentityGP",
+          name: "VerifyIdentityGP",
+          component: () => import("@/views/group/verifyIdentity")
+        },
+        {
+          path: "roomTypeGP",
+          name: "RoomTypeGP",
+          component: () => import("@/views/group/roomType")
+        },
+        {
+          path: "apartmentGP",
+          name: "ApartmentGP",
+          component: () => import("@/views/group/apartment")
+        },
+        {
+          path: "makeCardGP",
+          name: "MakeCardGP",
+          component: () => import("@/views/group/makeCard")
+        },
+        {
           path: "continuedRoom",
           name: "ContinuedRoom",
           component: () => import("@/views/continu/continuedRoom")
