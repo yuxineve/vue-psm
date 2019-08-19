@@ -36,6 +36,16 @@
         </div>
         <el-button v-if="!config.IsValid" type="success" @click="handleCard">下一步</el-button>
       </div>
+      <div class="checkCode" v-if="checkCode">
+        <div>
+          <img src="../../assets/images/searchIcon.png" />
+          <el-input placeholder="请输入验证码" v-model="checkCodeVal" autofocus="autofocus" clearable @focus="show" data-layout="numeric" ></el-input>
+          <span @click="submit">提交</span>
+        </div>
+        <div>
+          <vue-touch-keyboard :layout="layout"  :input="input" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +54,9 @@
 import Vue from "vue"
 import StepTips from "@/components/StepTips"
 import DisclaimerContent from "@/components/Content"
-import { Button, Table, TableColumn } from "element-ui"
+import { Button, Table, TableColumn, Input } from "element-ui"
+import VueTouchKeyboard from "vue-touch-keyboard"
+import style from "vue-touch-keyboard/dist/vue-touch-keyboard.css";
 import cfg from "@/config/index.js"
 import common from "@/utils/common.js"
 import '@/assets/style/common.less';
@@ -52,6 +64,8 @@ import '@/assets/style/common.less';
 Vue.use(Button);
 Vue.use(Table);
 Vue.use(TableColumn);
+Vue.use(Input);
+Vue.use(VueTouchKeyboard);
 
 export default {
   name: 'GroupRoom',
@@ -62,6 +76,11 @@ export default {
       siteStepText:this.$store.state.orderStepTextState,
       placeholder:'请填写预订时预留的姓名',
       isSelectBg:true,//true显示姓名查询，false显示身份证查询，
+      checkCode:false,//是否有验证码验证
+      checkCodeVal:'',//验证码值
+      layout: "numeric",
+      input: null,
+      rowTrData:'',
       tableData: [{
           group: '超能陆战队',
           name: '小朵',
@@ -140,8 +159,18 @@ export default {
     },
     handleEdit(index,row){
       console.log(row);
-      this.$router.push({path:'roomTypeGP',query:{id:row.id}});
-    }
+      this.rowTrData = row;
+      // this.$router.push({path:'roomTypeGP',query:{id:row.id}});
+      this.checkCode = true;
+    }, 
+    submit(){
+      const that = this;
+      this.$router.push({path:'roomTypeGP',query:{id:that.rowTrData.id}});
+    },
+    show(e) {
+      this.input = e.target;
+      this.layout = e.target.dataset.layout;
+    },
   },
   computed: {},
   watch: {},
@@ -157,6 +186,7 @@ export default {
     color: #013F3D!important;
   }
   .findorder{
+    position:relative;
     float:left;
     margin:114px 0 0 60px;
     .orderType{
@@ -257,6 +287,75 @@ export default {
           width:190px;
           height:218px;
           margin:0 15px 0;
+        }
+      }
+    }
+    .checkCode{
+      position: absolute;
+      width: 554px;
+      height: 388px;
+      background: rgba(0,0,0,0.9);
+      top: 0px;
+      z-index: 9;
+      left: -30px;
+      padding: 40px 99px 0 99px;
+      > div:first-child{
+        .el-input{ 
+          width: 200px;
+          height: 50px;
+          color: #FAFCFC;
+          font-size: 18px;
+        }
+        .el-input__inner{
+          background: none;
+          border: 1px solid #02FBE7;
+          width: 200px;
+          height: 50px;
+          border-radius: 10px;
+        }
+        >img{
+          width:56px;
+          height:57px;
+          float: left;
+          margin:-4px 16px 0 0;
+        }
+        > span{
+          display:inline-block;
+          width:64px;
+          height:45px;
+          color: #012625;
+          font-size:18px;
+          background:#F39800;
+          line-height:45px;
+          text-align: center;
+          border-radius:10px;
+          margin-left:20px;
+          cursor: pointer;
+        }
+      }
+      > div:last-child{
+        width:248px;
+        height:218px;
+        margin:40px 0 0 50px;
+        .line:last-child{
+          .key:nth-child(-n+3){
+            display:none;
+          }
+          .key:nth-child(4){
+            flex:88 1 0%!important;
+          }
+          .next ,.accept {
+            display:none;
+          }
+        }
+        .backspace{
+          margin-right:0;
+        }
+        .vue-touch-keyboard .keyboard .key{
+          background-color:#F39800;
+          color:#fff;
+          font-size:20px;
+          border:none;
         }
       }
     }
