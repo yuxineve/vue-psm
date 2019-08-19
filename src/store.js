@@ -27,34 +27,33 @@ export default new Vuex.Store({
       num:'04',
       selectClass:false,
     }],
-    siteStepTextState: [
-      //现场入住step
-      {
+    siteStepTextState: [{//现场入住step
         text: "选择房型",
         num: "01",
         selectClass: true
-      },
-      {
+      },{
         text: "办理入住",
         num: "02",
         selectClass: false
-      },
-      {
+      },{
         text: "验证身份",
         num: "03",
         selectClass: false
-      },
-      {
+      },{
         text: "支付费用",
         num: "04",
         selectClass: false
-      },
-      {
+      },{
         text: "制作房卡",
         num: "05",
         selectClass: false
       }
-    ]
+    ],
+    outStepTextState:[{//退房
+      text:'办理退房',
+      num:'01',
+      selectClass:true,
+    }],
   },
   mutations: {
     decrease(state) {
