@@ -113,6 +113,11 @@ export default new Router({
           path: "techrepublic",
           name: "Techrepublic",
           component: () => import("@/views/public/techrepublic")
+        },
+        {
+          path: "verifyPublic",
+          name: "VerifyPublic",
+          component: () => import("@/views/public/verifyPublic")
         }
       ]
     }

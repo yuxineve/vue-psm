@@ -54,6 +54,28 @@ export default new Vuex.Store({
       num:'01',
       selectClass:true,
     }],
+    continuStepTextState:[{//续房
+      text:'查找房间',
+      num:'01',
+      selectClass:true,
+    },{
+      text:'支付费用',
+      num:'02',
+      selectClass:false,
+    },{
+      text:'制作房卡',
+      num:'03',
+      selectClass:false,
+    }],
+    publicStepTextState:[{//公安
+      text:'读取房卡',
+      num:'01',
+      selectClass:true,
+    },{
+      text:'验证身份',
+      num:'02',
+      selectClass:false,
+    }]
   },
   mutations: {
     decrease(state) {

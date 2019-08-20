@@ -47,6 +47,6 @@ export default {
 </style>
 `;
 
-fs.writeFileSync(`./src/views/checkout/${dirName}.vue`, indexTep); // 创建对应的文件views components
+fs.writeFileSync(`./src/views/public/${dirName}.vue`, indexTep); // 创建对应的文件views components
 console.log("文件创建成功")
 process.exit(0)
