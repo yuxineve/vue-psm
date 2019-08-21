@@ -105,6 +105,11 @@ export default new Router({
           component: () => import("@/views/continu/continuedRoom")
         },
         {
+          path: "markCardContinu",
+          name: "MarkCardContinu",
+          component: () => import("@/views/continu/markCardContinu")
+        },
+        {
           path: "checkoutRoom",
           name: "CheckoutRoom",
           component: () => import("@/views/checkout/checkoutRoom")

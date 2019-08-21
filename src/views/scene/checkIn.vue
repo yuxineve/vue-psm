@@ -284,7 +284,7 @@ export default {
         height:30px;
         text-align: center;
         line-height: 30px;
-        margin: 0 12px 6px 0;
+        margin: 0 10px 6px 0;
         font-size:18px;
       }
       .priceDate > div > span{ 
