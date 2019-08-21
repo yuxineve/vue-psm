@@ -143,7 +143,7 @@ export default {
       this.idcardHandle();
     },
     markCard(){
-      this.$router.push('makeCard');
+      this.$router.push('markCardOrder');
     },
     idcardHandle(){//识别身份信息
       const that = this;

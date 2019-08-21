@@ -55,6 +55,11 @@ export default new Router({
           component: () => import("@/views/order/apartment")
         },
         {
+          path: "markCardOrder",
+          name: "MarkCardOrder",
+          component: () => import("@/views/order/markCardOrder")
+        },
+        {
           path: "sceneRoom",
           name: "SceneRoom",
           component: () => import("@/views/scene/sceneRoom")
