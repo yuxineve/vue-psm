@@ -80,7 +80,7 @@ export default {
     return {
       config:cfg,
       siteStepText:this.$store.state.continuStepTextState,
-      leftTips:'',
+      leftTips:'hahhahahhah',
       roomCardImg:require("@/assets/images/insertCard.gif"), 
       priceImg:require("@/assets/images/loadRead.gif"),
       orderImg:require("@/assets/images/orderImg.png"),
