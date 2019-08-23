@@ -35,7 +35,7 @@ export default new Router({
           component: () => import("@/views/pageIntro")
         },
         {
-          path: "orderRoom",
+          path: "orderRoom",//订单
           name: "OrderRoom",
           component: () => import("@/views/order/orderRoom")
         },
@@ -60,7 +60,7 @@ export default new Router({
           component: () => import("@/views/order/markCardOrder")
         },
         {
-          path: "sceneRoom",
+          path: "sceneRoom", //现场
           name: "SceneRoom",
           component: () => import("@/views/scene/sceneRoom")
         },
@@ -80,7 +80,7 @@ export default new Router({
           component: () => import("@/views/scene/makeCard")
         },
         {
-          path: "groupRoom",
+          path: "groupRoom",//团队
           name: "GroupRoom",
           component: () => import("@/views/group/groupRoom")
         },
@@ -105,7 +105,7 @@ export default new Router({
           component: () => import("@/views/group/makeCard")
         },
         {
-          path: "continuedRoom",
+          path: "continuedRoom",//续房
           name: "ContinuedRoom",
           component: () => import("@/views/continu/continuedRoom")
         },
@@ -115,12 +115,12 @@ export default new Router({
           component: () => import("@/views/continu/markCardContinu")
         },
         {
-          path: "checkoutRoom",
+          path: "checkoutRoom",//退房
           name: "CheckoutRoom",
           component: () => import("@/views/checkout/checkoutRoom")
         },
         {
-          path: "techrepublic",
+          path: "techrepublic",//公安验证
           name: "Techrepublic",
           component: () => import("@/views/public/techrepublic")
         },
