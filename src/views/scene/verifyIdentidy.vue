@@ -141,6 +141,7 @@ export default {
     payNext(){//绑定支付，扫二维码
       this.isOpacity = true;
       this.isIdentifyFace = false;
+      this.$store.commit("changeStatus", false);
       this.siteStepText.map((val,key) => {
         (key <= 3) ? val.selectClass = true : val.selectClass = false;
         return val;

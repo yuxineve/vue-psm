@@ -40,7 +40,7 @@ export default {
   },
   created () {
     this.$store.commit("changeStatus", false);//隐藏上一页的按键
-    this.$store.commit("changeHomeStatus", true);//展示首页的按键
+    this.$store.commit("changeHomeStatus", false);//隐藏首页的按键
     this.siteStepText.map((val,key) => {
       return val.selectClass = true;
     });
@@ -48,10 +48,12 @@ export default {
   },
   methods: {
     cardDefeated(){
+      this.$store.commit("changeHomeStatus", true);//展示首页的按键
       this.cardTips = '制卡失败';
       this.roomImgCard = require("@/assets/images/cardDefeated.png");
     },
     cardSuccess(){
+      this.$store.commit("changeHomeStatus", true);//展示首页的按键
       this.cardTips = '请取走房卡';
       this.roomImgCard = require("@/assets/images/cardSuccess.png");
     }
