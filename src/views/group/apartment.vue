@@ -35,6 +35,7 @@
           <span class="btn" @click="confirmRoomed">确认入住</span>
           <label>房型：{{selectRoomMsg.roomType}}</label>
           <label>房间号：{{selectRoomMsg.roomNum}}</label>
+          <label>姓名：{{selectRoomMsg.name == "" ? "&nbsp;—&nbsp;" : selectRoomMsg.name}}</label>
         </div>
       </div>
     </div>
@@ -63,34 +64,40 @@ export default {
           id:1,
           state:1,//1：可办理，2：已选中，3：已办理
           isNum:true,
+          name:'zuikeao',
         },{
           roomNum:'1023',
           roomType:'标准主题房',
           id:2,
           state:3,
           isNum:true,
+          name:'',
         },{
           roomNum:'6723',
           roomType:'标准主题房',
           id:3,
           state:1,
+          name:'',
           isNum:true,
         },{
           roomNum:'234',
           roomType:'标准主题房',
           id:4,
+          name:'',
           state:3,
           isNum:true,
         },{
           roomNum:'1567',
           roomType:'标准主题房',
           id:5,
+          name:'',
           state:1,
           isNum:true,
         },{
           roomNum:'456',
           roomType:'标准主题房',
           id:6,
+          name:'',
           state:1,
           isNum:true,
         },{
@@ -98,12 +105,14 @@ export default {
           roomType:'标准主题房',
           id:7,
           state:1,
+          name:'',
           isNum:true,
         },{
           roomNum:'',
           roomType:'无房号房型',
           id:8,
           state:1,
+          name:'',
           isNum:false,
           totle:2,
           remain:1,
@@ -112,30 +121,35 @@ export default {
           roomType:'标准主题房',
           id:4,
           state:3,
+          name:'',
           isNum:true,
         },{
           roomNum:'1567',
           roomType:'标准主题房',
           id:5,
           state:1,
+          name:'',
           isNum:true,
         },{
           roomNum:'456',
           roomType:'标准主题房',
           id:6,
           state:1,
+          name:'',
           isNum:true,
         },{
           roomNum:'0921',
           roomType:'标准主题房',
           id:7,
           state:1,
+          name:'',
           isNum:true,
         },{
           roomNum:'',
           roomType:'无房号房型',
           id:8,
           state:3,
+          name:'',
           isNum:false,
           totle:2,
           remain:0,
@@ -312,7 +326,7 @@ export default {
           border-radius: 5px;
           color: #FAFAFB;
           padding-left: 6px;
-          margin:16px 48px 0px;
+          margin:6px 48px 0px;
           font-size: 12px;
         }
       }
