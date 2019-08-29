@@ -8,7 +8,7 @@ export default new Vuex.Store({
     count: 120,
     seenGoBack: true,
     seenHome: false,
-    timeOutSrc:'',
+    timeOutSrc:'',//延时icon
     IsDisclaiDisplay: true,//展示免责
     orderStepTextState:[{//订单取房
       text:'查询订单',
