@@ -86,6 +86,10 @@ export default {
         val.selectClass = false;
       }
       return val;
+    });
+    this.VueAxios(this.ServeApi.getTotleRTScene,'')
+    .then(res => {
+      console.log(res);
     })
   },
   methods: {},

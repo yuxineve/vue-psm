@@ -8,9 +8,15 @@ let pending = []; //声明一个数组用于存储每个ajax请求的取消函�
 let cancel = "";
 let requestConfig = {
   production: "http://pms.tutrav.cn",
+  development: "http://192.168.0.176:9000",//"http://pms.tutrav.cn",
+  timeout: 3000
+};
+let localUrl = {
+  production: "http://pms.tutrav.cn",
   development: "http://pms.tutrav.cn",
   timeout: 3000
 };
+
 let removePending = ever => {
   for (let i in pending) {
     const urlEve = pending[i].config.url + "&" + pending[i].config.method;
@@ -21,12 +27,13 @@ let removePending = ever => {
     }
   }
 };
-
-axios.defaults.baseURL = requestConfig[process.env.NODE_ENV];
+// axios.defaults.baseURL = requestConfig[process.env.NODE_ENV];
+axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(
   config => {
     // 每次请求之前拦截加上token
+    // debugger;
     const token = sessionStorage.token;
     if(token && config.url.indexOf('login') == -1){
       config.headers.Authorization = "Bearer " + token;
@@ -71,13 +78,14 @@ axios.interceptors.response.use(
   }
 );
 
-const handelData = (options, data) => {
+const VueAxios = (options, data) => {
   let httpDefaultOpts = {
+    baseURL: requestConfig[process.env.NODE_ENV],
     timeout: requestConfig.timeout,
     method: options.method,
     url: options.url,
     responseType: "json",
-    withCredentials: false, // 表示跨域请求时是否需要使用凭证
+    // withCredentials: true, // 表示跨域请求时是否需要使用凭证
     arrayFormat: options.arrayFormat, //有三个参数 'indices' id[0]=b&id[1]=c  'brackets' 'id[]=b&id[]=c' 'repeat' 'id=b&id=c'
     data,
     header: {
@@ -87,7 +95,8 @@ const handelData = (options, data) => {
       cancel = c; // 记录当前请求的取消方法
     })
   };
-  httpDefaultOpts.data = httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
+  httpDefaultOpts.data =
+    httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
   return new Promise((resolve, reject) => {
     axios(httpDefaultOpts)
       .then(response => {
@@ -99,4 +108,33 @@ const handelData = (options, data) => {
   });
 };
 
-export default handelData;
+const LocalAxios = (options, data) => {
+  let httpDefaultOpts = {
+    baseURL: localUrl[process.env.NODE_ENV],
+    timeout: localUrl.timeout,
+    method: options.method,
+    url: options.url,
+    responseType: "json",
+    arrayFormat: options.arrayFormat,
+    data,
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    cancelToken: new axios.CancelToken(c => {
+      cancel = c; // 记录当前请求的取消方法
+    })
+  };
+  httpDefaultOpts.data =
+    httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
+  return new Promise((resolve, reject) => {
+    axios(httpDefaultOpts)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+export { VueAxios, LocalAxios };

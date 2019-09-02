@@ -24,7 +24,7 @@
 
 <script>
 import Vue from "vue";
-import { Button, Input, Icon } from "element-ui";
+import { Button, Input, Icon, Message } from "element-ui";
 
 Vue.use(Button);
 Vue.use(Input);
@@ -43,15 +43,33 @@ export default {
   methods: {
     loginIn: function() {
       var that = this;
+      if(this.username == "" || this.password == ""){
+        Message({
+          message: "账号或密码不能为空！",
+          type: 'warning'
+        });
+        return;
+      }
       const params = {
         username: this.username,
         password: this.password,
       };
       this.VueAxios(this.ServeApi.login, params)
-        .then(res => {
-          sessionStorage.setItem("token", res.data);
+      .then(res => {
+        if(res.code == 200){
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("code",res.data.code);
+          sessionStorage.setItem("enterpriseCode",res.data.enterpriseCode);
+          sessionStorage.setItem("hotelId",res.data.hotelId);
+          sessionStorage.setItem("url",res.data.url);
           that.$router.push("/home");
-        })
+        }else{
+          Message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      })
     }
   },
   computed: {},
