@@ -48,7 +48,8 @@
           <div class="roomPrice">
             <div class="priceTitle"><label>价格表</label></div>
             <div class="priceDate">
-              <div v-for="(item,index) in priceDetail" :key="index">
+              <div v-if="priceDetail.length == 0" class="noPrice">暂无近期房价~</div>
+              <div v-else v-for="(item,index) in priceDetail" :key="index">
                 <label>{{item.date}}</label>
                 <span>￥ {{item.price}}</span>
               </div>
@@ -63,10 +64,10 @@
         </div>
       </div>
       <div class="roomImg">
-        <div>
+        <div class="elCarousel">
           <el-carousel :interval="5000" arrow="always" indicator-position="outside" height="138px">
-            <el-carousel-item v-for="(item,index) in cardImg" :key="index">
-              <img :src="item.img">
+            <el-carousel-item v-for="(item,index) in roomTypeMsg.imgs" :key="index">
+              <img :src="item">
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -76,20 +77,20 @@
             <div class="threeMsg">
               <div>
                 <span>宽带：</span>
-                <label>wifi</label>
+                <label>{{roomTypeMsg.broadBand}}</label>
               </div>
               <div>
                 <span>早餐：</span>
-                <label>无</label>
+                <label>{{roomTypeMsg.breakfast}}</label>
               </div>
               <div class="vehicle">
                 <span>政策：</span>
-                <label>我可真是个机智的小可爱啊</label>
+                <label>{{roomTypeMsg.policy}}</label>
               </div>
             </div>
             <div class="remark clearfix">
               <span>备注：</span>
-              <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
+              <span>{{roomTypeMsg.remark}}</span>
             </div>
           </div>
         </div>
@@ -102,7 +103,7 @@
 import Vue from "vue"
 import '@/assets/style/common.less';
 import StepTips from "@/components/StepTips"
-import { Button, Carousel, CarouselItem, DatePicker,  } from "element-ui"
+import { Button, Carousel, CarouselItem, DatePicker, Message } from "element-ui"
 
 Vue.use(Button);
 Vue.use(Carousel);
@@ -114,57 +115,31 @@ export default {
   data () {
     return {
       siteStepText:this.$store.state.siteStepTextState,
-      totlePrice:'3000',
+      totlePrice:' / ',
       dateValue:'',
       selectNumP:['1人','2人','3人','4人'],
       selectNumD:['1天','2天','3天','4天','5天','其他'],
-      priceDetail:[{
-        date:'7月23日',
-        price:300,
-      },{
-        date:'7月23日',
-        price:400,
-      },{
-        date:'7月23日',
-        price:200,
-      },{
-        date:'7月23日',
-        price:300,
-      },{
-        date:'7月23日',
-        price:300,
-      }],
+      roomTypeMsg:"",
+      priceDetail:[],
       IsActiveP:0,//选择人数
       IsActiveD:0,
-      cardImg:[
-        { 
-          img: require("@/assets/images/adImgLevel-2/ad1.jpg"), 
-          title:'1'
-        },{
-          img: require("@/assets/images/adImgLevel-2/ad2.jpg"), 
-          title:'1'
-        },{
-          img: require("@/assets/images/adImgLevel-2/ad3.jpg"), 
-          title:'1'
-        }],
-        pickerOptions:{
-          disabledDate (time) {
-              return time.getTime() < new Date(new Date().toLocaleDateString()).getTime();
-          },
-        }
+      pickerOptions:{
+        disabledDate (time) {
+            return time.getTime() < new Date(new Date().toLocaleDateString()).getTime();
+        },
+      }
     }
   },
   created () {
+    const that = this;
     this.$store.commit("changeStatus", true);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {
-      if(key <= 1){
-        val.selectClass = true;
-      }else{
-        val.selectClass = false;
-      }
+      (key <= 1) ? val.selectClass = true : val.selectClass = false;
       return val;
-    })
+    });
+    this.getRoomTypeMsg();
+    this.getRoomPrice(5);
   },
   methods: {
     handleActiveP(index){//选择人数
@@ -175,6 +150,47 @@ export default {
     },
     changeDate(){
         console.log('dateValue:',this.dateValue)
+    },
+    getRoomTypeMsg(){//获取房型信息
+      const that = this;
+      const params = {
+        "roomTypeId":this.$route.query.id
+      }
+      this.VueAxios(this.ServeApi.getThisRTScene, "" ,params )
+      .then(res => {
+        if(res.code == 200){
+          that.roomTypeMsg = res.data;
+        }else{
+          Message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      });
+    }, 
+    getRoomPrice(dayNum){
+      const that = this;
+      const params = {
+        "roomTypeId":this.$route.query.id,
+        "day":dayNum,
+      }
+      this.VueAxios(this.ServeApi.getPriceByDayScene,"",params)
+      .then(res => {
+        console.log(res);
+        if(res.code == 200) {
+          that.totlePrice = res.data.totalPrice;
+          res.data.priceTable.map((item,index) => {
+            let year = item.time.split(' ')[0].split('-');
+            item.date = year[1] + '月' + year[2] + '日';
+          });
+          that.priceDetail = res.data.priceTable;
+        }else{
+          Message({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      })
     }
   },
   computed: {},
@@ -275,6 +291,15 @@ export default {
         height: 150px;
         overflow-y: auto;
         margin:6px 7px;
+        .noPrice{
+          text-align: center;
+          padding-top: 30px;
+          border: 1px solid #03D4E7;
+          border-radius: 4px;
+          height: 102px;
+          width: 150px;
+          margin: 0 16px;
+        }
       }
       .priceDate > div > label,.priceDate > div > span{
         border:1px solid #03D4E7;
@@ -285,7 +310,10 @@ export default {
         text-align: center;
         line-height: 30px;
         margin: 0 10px 6px 0;
-        font-size:18px;
+        font-size:16px;
+      }
+      .priceDate > div > label{
+        font-size:16px;
       }
       .priceDate > div > span{ 
         color:#F39800;
@@ -329,6 +357,9 @@ export default {
     height: 320px;
     border-radius:1px;
     margin:70px 0 0 40px;
+    .elCarousel{
+      height:164px;
+    }
     img{
       width:100%;
       height:100%;
@@ -360,7 +391,7 @@ export default {
   .roomImgDetail > div{
     float:left;
     width:102px;
-    height: 92px;
+    height: 84px;
   }
   .roomImgDetail > div:first-child{
     margin-right:14px;

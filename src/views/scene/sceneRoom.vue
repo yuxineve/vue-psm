@@ -10,14 +10,18 @@
       <div class="tipsIcon"></div>
     </div>
     <div class="roomType">
-      <div v-for="(item,index) in roomType" class="roomBorder" :key="index">
-        <router-link :to="{ name: 'CheckIn', query:{id: item.id}}">
-          <div class="roomPhoto"><img :src="item.img" />></div>
-          <div class="priceBottom">
-            <span>{{item.title}}</span>
-            <span>{{item.price}}/天</span>
-          </div>
-        </router-link>
+      <div v-for="(item,index) in roomType" class="roomBorder" @click="handleRoomType(item)" :key="index">
+        <div class="roomPhoto">
+          <label v-if="!item.canRes">
+            <span class="fullText">满房</span>
+            <div class="fullRoom"></div>
+          </label>
+          <img :src="item.imgName" />
+        </div>
+        <div class="priceBottom">
+          <span>{{item.roomType}}</span>
+          <span>{{item.todayPrice}}/天</span>
+        </div>
       </div>
     </div>
   </div>
@@ -29,7 +33,7 @@ import '@/assets/style/common.less';
 import Vue from "vue"
 import DisclaimerContent from "@/components/Content"
 import StepTips from "@/components/StepTips"
-import { Button } from "element-ui"
+import { Button, Message } from "element-ui"
 
 Vue.use(Button);
 
@@ -38,64 +42,41 @@ export default {
   data () {
     return {
       siteStepText:this.$store.state.siteStepTextState,
-      roomType:[{
-        title:'标准主题房',
-        img:require("@/assets/images/login.jpg"),
-        price:'100',
-        id:1,
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/adImgLevel-2/ad1.jpg"),
-        price:'100',
-        id:2,
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/1.jpg"),
-        price:'100',
-        id:3
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/1.jpg"),
-        price:'100',
-        id:4
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/1.jpg"),
-        price:'100',
-        id:5,
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/1.jpg"),
-        price:'100',
-        id:6,
-      },{
-        title:'标准主题房',
-        img:require("@/assets/images/1.jpg"),
-        price:'100',
-        id:7,
-      }]
+      roomType:[],
     }
   },
   created () {
-    this.$store.commit("changeStatus", true);//展示上一页的按键
+    const that = this;
+    this.$store.commit("changeStatus", false);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {
-      if(key <= 0){
-        val.selectClass = true;
-      }else{
-        val.selectClass = false;
-      }
+      (key <= 0) ? val.selectClass = true : val.selectClass = false;
       return val;
     });
     this.VueAxios(this.ServeApi.getTotleRTScene,'')
     .then(res => {
-      console.log(res);
+      if(res.code == 200){
+        that.roomType = res.data;
+      }else{
+        Message({
+          message: res.msg,
+          type: 'warning'
+        });
+      }
     })
   },
-  methods: {},
-  computed: {},
-  watch: {},
-  props: [ ],
+  methods: {
+    handleRoomType(item){
+      if(item.canRes){
+        this.$router.push({path:"CheckIn",query:{id: item.roomTypeId}});
+      }else{
+        Message({
+          message: "您选择的房型，今日已满房，请选择其他房型！",
+          type: 'warning'
+        });
+      }
+    }
+  },
   components: { DisclaimerContent, StepTips}
 }
 </script>
@@ -114,10 +95,31 @@ export default {
     overflow-x:hidden;
     overflow-y: auto; 
     .roomPhoto{
+      position:relative;
       width:220px;
       height:140px;
       border-radius:10px;
       overflow: hidden;
+      .fullRoom {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 70px solid;
+        border-color: transparent transparent transparent #a0d56d;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: -72px;
+        right: -72px;
+      }
+      .fullText {
+        position: absolute;
+        font-size:18px;
+        color:#EEEEEE;
+        right: 12px;
+        top:12px;
+        z-index: 7;
+        transform: rotate(45deg);
+      }
       img{
         width: 220px;
         height: 140px;

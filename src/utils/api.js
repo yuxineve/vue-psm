@@ -78,7 +78,7 @@ axios.interceptors.response.use(
   }
 );
 
-const VueAxios = (options, data) => {
+const VueAxios = (options, data, params) => {
   let httpDefaultOpts = {
     baseURL: requestConfig[process.env.NODE_ENV],
     timeout: requestConfig.timeout,
@@ -88,6 +88,7 @@ const VueAxios = (options, data) => {
     // withCredentials: true, // 表示跨域请求时是否需要使用凭证
     arrayFormat: options.arrayFormat, //有三个参数 'indices' id[0]=b&id[1]=c  'brackets' 'id[]=b&id[]=c' 'repeat' 'id=b&id=c'
     data,
+    params,
     header: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
@@ -95,8 +96,7 @@ const VueAxios = (options, data) => {
       cancel = c; // 记录当前请求的取消方法
     })
   };
-  httpDefaultOpts.data =
-    httpDefaultOpts.method === "post" ? qs.stringify(httpDefaultOpts.data) : "";
+  httpDefaultOpts.data =httpDefaultOpts.method === "post"? qs.stringify(httpDefaultOpts.data): "";
   return new Promise((resolve, reject) => {
     axios(httpDefaultOpts)
       .then(response => {
