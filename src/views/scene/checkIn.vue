@@ -202,7 +202,7 @@ export default {
         }
       });
       if(flag){
-        this.$router.push({path:'VerifyIdentidy',query:{'peopleNum':this.IsActiveP+1}})
+        this.$router.push({path:'VerifyIdentidy',query:{'peopleNum':this.IsActiveP+1,'totlePrice':this.totlePrice,"roomTypeId":this.$route.query.id}})
       }else{
         Message({
           message: "您的选择包含“暂无价格”的日期，请重新选择",

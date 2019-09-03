@@ -40,6 +40,18 @@ const SERVE_API = {
     method: "post",
     url: "/pubSec/uploadCheckinInfo",
     arrayFormat: ""
+  },
+  checkVallidation: {
+    //前序酒店验证
+    method: "post",
+    url: "/localeRes/checkinValidation",
+    arrayFormat: ""
+  },
+  lockRoom: {
+    //锁房
+    method: "post",
+    url: "/localeRes/lockRoom",
+    arrayFormat: ""
   }
 };
 

@@ -1,17 +1,30 @@
 import cfg from "@/config/index.js";
-/* 
-*写卡文件
-*eleID:读卡硬件ID
+
+/*制卡
+*writeParams:写卡请求的参数,酒店ID，详单ID，订单号，房间号，入离时间，早餐券
 */
-const writeCard = () => {
-    var eleID = ducument.getElementById("writeCard");
-    initPort(eleID);
-    if(cfg.isWriteCard){//是否写卡
-
-
-    }
+const WriteCard = (writeParams) => {
+	var WriteCardStatus = false;
+	var CallBack; //写卡回调变量
+	$.ajax({
+		url: szblMCom.urlJY + '/outCall/doorlock/writeCard',
+		type: 'POST',
+		catch: false,
+		async: false,
+		data: writeParams,
+		success: function(ResponseWCard) {
+			if(ResponseWCard.code == 0) { //返回的code不等0写卡失败
+				WriteCardStatus = true;
+			} else {
+				Eject();
+			}
+		},
+		error: function(e) { //接口异常返回的
+			Eject();
+		}
+	});
+	return WriteCardStatus;
 }
-
 //初始化串口
 const initPort = eleID => {
   closePort(eleID);

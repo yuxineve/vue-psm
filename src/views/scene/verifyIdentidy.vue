@@ -50,11 +50,11 @@
       <span v-if="!isIdentifyFace">
         <div class="title"><span>订单详情</span></div>
         <div class="img" style="overflow:visible">
-          <div class="orderImg"><img :src="orderImg"/></div>
+          <div class="orderImg"><img :src="orderMsg.imgName"/></div>
           <div class="orderDetail" style="padding:12px 40px;width:100px;">
-            <span>房型：主题房</span>
-            <span>房间：主题房</span>
-            <span>总价：主题房</span>
+            <span>房型：{{orderMsg.roomType}}</span>
+            <span>房间：{{orderMsg.roomNum}}</span>
+            <span>总价：{{orderMsg.totlePrice}}</span>
           </div>
         </div>
       </span>
@@ -74,7 +74,7 @@
 import '@/assets/style/common.less';
 import Vue from "vue"
 import StepTips from "@/components/StepTips"
-import { Button } from "element-ui"
+import { Button, Message } from "element-ui"
 import cfg from "@/config/index.js"
 import common from "@/utils/common.js"
 
@@ -88,46 +88,43 @@ export default {
       config:cfg,
       isOpacity:false,//暗化人脸识别和身份证模块
       siteStepText:this.$store.state.siteStepTextState,
-      IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img
-      IDCardImged:require("@/assets/images/1.jpg"),//身份证识别的照片 
+      IDCardImg:require("@/assets/images/idCard.gif"),//身份证待识别的img 
       faceImg:'',//人脸识别后生成的img
-      orderImg:require("@/assets/images/1.jpg"),
       isIdentifyFace:false,//人脸是否识别完成
       isIdentifyIDCard:false,//IDCard是否识别完成
       name:'',
       IDCard:'',
       displayFaceImg:true,//是否隐藏识别的人脸照片
+      orderMsg:'',
+      peopleNum:this.$route.query.peopleNum,//识别几个人入住
     }
   },
   created () {
     cfg.peopleData = [];
+    const that = this;
     this.$store.commit("changeStatus", true);//展示上一页的按键
     this.$store.commit("changeHomeStatus", true);//展示首页的按键
     this.siteStepText.map((val,key) => {//step
       (key <= 2) ? val.selectClass = true : val.selectClass = false;
       return val;
     });
+    this.VueAxios(this.ServeApi.lockRoom,this.$route.query)
+    .then(res => {
+      if(res.code =200){
+        that.orderMsg = res.data;
+        that.orderMsg.totlePrice = that.$route.query.totlePrice;
+      }else{
+        Message({
+          message: res.msg,
+          type: 'warning'
+        });
+      }
+    })
   },
   mounted(){
-  	const that = this;
-		setTimeout(function(){	
+    const that = this;
+    setTimeout(function(){	
       that.getDistingMark();
-      const reg = new RegExp('base64');
-	    if(reg.test(that.IDCardImged)){
-	    	const len = cfg.peopleData.length;
-	      cfg.peopleData.map((val,key,arr) => {
-	        if(len == (key+1)){
-	          that.name = common.sensitString(val.name,0,1,'*');
-	          that.IDCard = common.sensitString(val.idCard,4,4,'*');
-	          that.isIdentifyIDCard = true;
-	          setTimeout(function(){
-	          	if(cfg.IsValid){//有硬件时 录入人脸
-		            that.facedNext();
-		          }
-	          },1000)
-	        }
-	      });
-    	}
     },1000)
   },
   methods: {
@@ -138,21 +135,50 @@ export default {
       this.isIdentifyFace = true;
       let flag = this.compareNum();
     },
-    payNext(){//绑定支付，扫二维码
-      this.isOpacity = true;
-      this.isIdentifyFace = false;
-      this.$store.commit("changeStatus", false);
-      this.siteStepText.map((val,key) => {
-        (key <= 3) ? val.selectClass = true : val.selectClass = false;
-        return val;
-      })
+    payNext(){//绑定支付，扫二维码,是否还有其他入住人
+      if(this.peopleNum == 1){
+        this.isOpacity = true;
+        this.isIdentifyFace = false;
+        this.$store.commit("changeStatus", false);
+        this.siteStepText.map((val,key) => {
+          (key <= 3) ? val.selectClass = true : val.selectClass = false;
+          return val;
+        })
+      }else{
+        this.leftTips = '请录入他人的身份信息';
+        this.peopleNum--;
+        this.isOpacity = false;
+        this.isIdentifyFace = false;
+        this.name = '';
+        this.IDCard = '';
+        this.getDistingMark();
+      }  
     },
     getDistingMark(){//读卡识别返回信息
       let rst = '';
+      const that = this;
       rst = common.handleCard();
       if(rst == 0x90){
-        this.leftTips = "身份扫描成功，请继续识别人脸！";
-        this.IDCardImged =  common.getPeopleMsg();
+        common.getPeopleMsg((rs) => {
+          console.log(rs);
+          const reg = new RegExp('base64');
+          if(reg.test(rs)){
+            that.leftTips = "身份扫描成功，请继续识别人脸！";
+            const len = cfg.peopleData.length;
+            cfg.peopleData.map((val,key,arr) => {
+              if(len == (key+1)){
+                that.name = common.sensitString(val.name,0,1,'*');
+                that.IDCard = common.sensitString(val.idCard,4,4,'*');
+                that.isIdentifyIDCard = true;
+                setTimeout(function(){
+                  if(cfg.IsValid){//有硬件时 录入人脸
+                    that.facedNext();
+                  }
+                },1000)
+              }
+            });
+          }
+        });
       }else if(rst==0x02){
         this.leftTips = "请重新将卡片放到读卡器上！";
         this.getDistingMark();

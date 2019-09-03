@@ -1,7 +1,10 @@
 
 import cfg from "@/config/index.js"
+import {VueAxios, LocalAxios } from "@/utils/api.js"
+import ServeApi from "@/utils/serveApi.js"
+import { Message } from "element-ui";
 
-const getPeopleMsg = () => {
+const getPeopleMsg = callback => {
   var flag = false;
   var embedObj = document.getElementById("RoutonReader");
   if (cfg.IsValid) {
@@ -20,39 +23,42 @@ const getPeopleMsg = () => {
     var NationL = "汉";
     var Born = "19931214";
     var Address = "海口市美兰区人民东里61号";
-  };
-  var infoflag = 0;
-  // if (cfg.peopleData.length > 0){
-  //   peopleData.map(function (item) {//校验身份证是否已经办理
-  //     if (item.kw1 == currentCardNo) {
-  //         infoflag = 1;//此处提示身份信息重复录入
-  //         embedObj.FaceCloseVideo(); //关闭摄像头
-  //         FaceVideo = 1;
-  //         embedObj.FaceRelease(); //释放人脸库初始化    可在页面退出时调用
-  //         handleCard();
-  //         return;
-  //     }
-  //   })
-  // };
-  if(infoflag == 0){
-    var cardArr = {
-      name: NameL,
-      idCard: currentCardNo,
-      img: Image,
-      sex: SexL,
-      nation: NationL,
-      born: Born,
-      kw8: "true",
-      public: "0", //公安网上传标识 （0-未退 1-已退）
-      address: Address
-    };
-    flag = "data:image/bmp;base64," + Image;
-    cfg.peopleData.push(cardArr);
-    if (cfg.IsValid) {
-      setTimeout(faceOpenVideo(), 500);
-    }
   }
-  return flag;
+  VueAxios(ServeApi.checkVallidation, { idNumber: currentCardNo }).then(res => {
+    if (res.code == 200) {
+      if (res.data == 0) {
+        var cardArr = {
+          name: NameL,
+          idCard: currentCardNo,
+          img: Image,
+          sex: SexL,
+          nation: NationL,
+          born: Born,
+          kw8: "true",
+          public: "0", //公安网上传标识 （0-未退 1-已退）
+          address: Address
+        };
+        flag = "data:image/bmp;base64," + Image;
+        cfg.peopleData.push(cardArr);
+        callback(flag);
+        if (cfg.IsValid) {
+          setTimeout(faceOpenVideo(), 500);
+        }
+      } else {
+        embedObj.FaceCloseVideo(); //关闭摄像头
+        embedObj.FaceRelease(); //释放人脸库初始化    可在页面退出时调用
+        handleCard();//重新识别IDCard
+        callback(flag);
+        return;
+      }
+    } else {
+      callback(flag);
+      Message({
+        message: res.msg,
+        type: "warning"
+      });
+    }
+  });
 };
 
 const faceOpenVideo = () => {//打开摄像头
@@ -80,7 +86,7 @@ const faceVideoComp = (that) => {
 };
 
 /*识别身份证*/
-const handleCard = (leftTips) => {
+const handleCard = () => {
   var embedObj = document.getElementById("RoutonReader");
   var isInit = false;
   var rst = null; //读卡识别标志
