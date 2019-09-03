@@ -27,18 +27,18 @@
             <span>请选择入住天数</span>
             <div class="selectNum">
               <ul class="clearfix">
-                <li v-for="(item,index) in selectNumD" :key="index" :class="{'active':IsActiveD == index}" @click="handleActiveD(index)">{{item}}</li>
+                <li v-for="(item,index) in selectNumD" :key="index" :class="{'active':IsActiveD == index}" @click="handleActiveD(item,index)">{{item}}</li>
               </ul>
               <label v-show="IsActiveD == 5">
+                <span>入离时间 : {{now}} ~</span>
                 <el-date-picker
                   v-model="dateValue"
-                  type="daterange"
+                  type="date"
                   @change="changeDate"
                   :picker-options="pickerOptions"
-                  value-format="yyyy-MM-dd"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期">
+                  format="yyyy-MM-dd"
+                  value-format="timestamp"
+                  placeholder="结束日期">
                 </el-date-picker>
               </label>
             </div>
@@ -51,15 +51,13 @@
               <div v-if="priceDetail.length == 0" class="noPrice">暂无近期房价~</div>
               <div v-else v-for="(item,index) in priceDetail" :key="index">
                 <label>{{item.date}}</label>
-                <span>￥ {{item.price}}</span>
+                <span>{{item.price == null ? "暂无价格" : "￥ "+item.price}}</span>
               </div>
             </div>
           </div>
           <div class="sureBtn">
-            <router-link :to="{ name: 'VerifyIdentidy'}">
-              <el-button type="warning" class="makeSureRoomed">确认入住</el-button>
-            </router-link>
-            <el-button>总价：{{totlePrice}}元</el-button>
+            <el-button @click="makeSureRoomed" type="warning" class="makeSureRoomed">确认入住</el-button>
+            <span class="checkPrice">总价：{{totlePrice}}元</span>
           </div>
         </div>
       </div>
@@ -125,7 +123,7 @@ export default {
       IsActiveD:0,
       pickerOptions:{
         disabledDate (time) {
-            return time.getTime() < new Date(new Date().toLocaleDateString()).getTime();
+          return time.getTime() < Date.now();
         },
       }
     }
@@ -139,17 +137,22 @@ export default {
       return val;
     });
     this.getRoomTypeMsg();
-    this.getRoomPrice(5);
+    this.getRoomPrice(1);
   },
   methods: {
     handleActiveP(index){//选择人数
       this.IsActiveP = index;
     },
-    handleActiveD(index){//选择天数
+    handleActiveD(item,index){//选择天数
       this.IsActiveD = index;
+      if(item != '其他'){
+        this.getRoomPrice(index+1);
+      } 
     },
     changeDate(){
-        console.log('dateValue:',this.dateValue)
+      var start_timer = new Date();
+      let utc = parseInt((this.dateValue - start_timer) / 86400000);
+      this.getRoomPrice(utc+1);
     },
     getRoomTypeMsg(){//获取房型信息
       const that = this;
@@ -176,7 +179,6 @@ export default {
       }
       this.VueAxios(this.ServeApi.getPriceByDayScene,"",params)
       .then(res => {
-        console.log(res);
         if(res.code == 200) {
           that.totlePrice = res.data.totalPrice;
           res.data.priceTable.map((item,index) => {
@@ -191,9 +193,37 @@ export default {
           });
         }
       })
+    },
+    makeSureRoomed(){
+      let flag = true;
+      this.priceDetail.map((item,index) => {
+        if(item.price == null ){
+          flag = false;
+        }
+      });
+      if(flag){
+        this.$router.push({path:'VerifyIdentidy',query:{'peopleNum':this.IsActiveP+1}})
+      }else{
+        Message({
+          message: "您的选择包含“暂无价格”的日期，请重新选择",
+          type: 'warning'
+        });
+      }
+      
     }
   },
-  computed: {},
+  computed: {
+    now: function () {
+      let nowDate = new Date();
+      let date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth() + 1 > 9? nowDate.getMonth() + 1: '0' + (nowDate.getMonth() + 1),
+        day: nowDate.getDate() > 9 ? nowDate.getDate() : '0' + nowDate.getDate(),
+      }
+      let startTimer = date.year + '-' + date.month + '-' + date.day;
+      return startTimer;
+    }
+  },
   watch: {},
   props: [ ],
   components: { StepTips }
@@ -253,12 +283,14 @@ export default {
         margin-top:7px;
         display:inline-block;
         padding: 2px 4px;
-        .el-date-editor--daterange.el-input__inner{
-          width: 100%;
-          color: #F8F9FB;
+        > span{
+          font-size:14px;
         }
-        .el-date-editor .el-range__icon,.el-date-editor .el-range__close-icon{
+        .el-input__icon{
           line-height:24px;
+        }
+        .el-date-editor.el-input{
+          width:134px;
         }
         .el-input__inner{
           background:none;
@@ -269,10 +301,6 @@ export default {
         input{
           background:none;
           color: #F8F9FB;
-        }
-        .el-date-editor .el-range-separator{
-          color: #F8F9FB;
-          line-height: 24px;
         }
       }
     }
@@ -289,8 +317,8 @@ export default {
       }
       .priceDate{
         height: 150px;
-        overflow-y: auto;
-        margin:6px 7px;
+        overflow-y: scroll;
+        margin:6px 8px;
         .noPrice{
           text-align: center;
           padding-top: 30px;
@@ -331,6 +359,18 @@ export default {
     width: 130px;
     text-align: center;
     padding: 40px;
+    > .checkPrice{
+      display:inline-block;
+      width:142px;
+      height:48px;
+      text-align: center;
+      border:1px solid #F39800;
+      color:#F8F9FB;
+      font-size:18px;
+      border-radius:10px;
+      margin-top:20px;
+      line-height:48px;
+    }
     .el-button+.el-button{
       margin-left:0;
     }

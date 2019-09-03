@@ -18,11 +18,6 @@ export default new Router({
       component: () => import("./views/Home.vue")
     },
     {
-      path: "/child",
-      name: "Child",
-      component: () => import("@/views/Child.vue")
-    },
-    {
       path: "/index",
       name: "Index",
       components: {
